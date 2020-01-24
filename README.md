@@ -7,6 +7,18 @@ Our project is the implementation of a basic command shell, complete with a user
 ## Diagram
 
 ## Classes
+### user.cpp
+The area that the user interacts with when they use the shell
+
+* display's the command prompt `guest@rshell:~$`
+* takes the user input and sends it where it needs to go
+
+### base.h
+A class function that other frameworks build off of
+
+* comprised of virtual functions as the class is meant to be used as a superclass
+* `parse()` : parses user input using tokens
+* `execute()` : returns a boolean true or false depending if a command executes properly
 
 
 ## Prototypes/Research
