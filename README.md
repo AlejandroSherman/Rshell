@@ -5,7 +5,7 @@
 Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell will allow for the use of standard commands after they are input by a user, such as `exit`, as well as the use of three connectors that allow users to execute multiple commands at once. These connectors are "||" (or), "&&" (and), and ";" (semi). The composite design pattern will be utilized to implement the commands and the connectors. The project will be created in C++ and features will be implemented using C++ classes and functions.
 
 ## Diagram
-![OMT_Diagram]()
+![OMT_Diagram](https://github.com/cs100/assignment-empty_string/blob/master/images/OMT_Diagram.png?raw=true)
 
 ## Classes
 ### user.cpp
@@ -51,6 +51,14 @@ A self designed rshell command to exit the rshell
 
 * `execute()` : a self designed function that exits the rshell
 * inherits command defined features
+* the rshell will keep running until this command is entered
+
+### comment.cpp
+A self designed rshell command flag to indicate to ingore the following input
+
+* `execute()` : a self designed function that ignores anything following the "#"
+* inherits command defined features
+* once a "#" is encountered anything in the following line is treated as empty
 
 ### and.cpp
 A class that implements the rshell "&&" connector
