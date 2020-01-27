@@ -33,6 +33,8 @@
 *.app
 rshell
 test
+main
+parsing
 
 # CMake Temp Files
 CMakeCache.txt
