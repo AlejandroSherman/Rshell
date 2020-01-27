@@ -82,5 +82,8 @@ A class that implements the rshell ";" connector
 * must utilize the command class to carry out the commands
 
 ## Prototypes/Research
-
+* fork() is used to create a new process, called child process
+* under the child process, execvp() allows the child process to run a different program
+* waitpid() allows the parent process to wait for the child process to finish and terminated before proceeding, this prevents memory leaks and zombie process from happening
+* During the use of shell, when receive new command, the parent process will fork and create a new child process, which will then execute parase using different delimiter to seperate the user command into different tokens. According to the tokens received, will be send to different classes for further actions. While the process is being executed by the child, parent process will wait till the child to finish in order to continue. 
 ## Development and Testing Roadmap
