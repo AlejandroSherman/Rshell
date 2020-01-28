@@ -1,5 +1,5 @@
 # CS 100 Programming Project
-> Winter 2020 - Alejandro Sherman (862062898) and Eddie...
+> Winter 2020 - Alejandro Sherman (862062898) and Ernie Hung ()
 
 ## Introduction
 Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell will allow for the use of standard commands after they are input by a user, such as `exit`, as well as the use of three connectors that allow users to execute multiple commands at once. These connectors are "||" (or), "&&" (and), and ";" (semi). The composite design pattern will be utilized to implement the commands and the connectors. The project will be created in C++ and features will be implemented using C++ classes and functions.
@@ -85,6 +85,6 @@ A class that implements the rshell ";" connector
 * fork() is used to create a new process, called child process
 * under the child process, execvp() allows the child process to run a different program
 * waitpid() allows the parent process to wait for the child process to finish and terminated before proceeding, this prevents memory leaks and zombie process from happening
-* During the use of rshell, when a new command is received, the parent process will fork and create a new child process, which will then execute parse using a different delimiter to separate the user commands into different tokens. According to the tokens received, commands will be sent to different classes for further actions. While the process is being executed by the child, the parent process will wait for the child to finish in order to continue. 
+* During the use of rshell, when a new command is received, the parent process will fork and create a new child process, which will then execute parse using a different delimiter to separate the user commands into different tokens. According to the tokens received, commands will be sent to different classes for further actions. While the process is being executed by the child, the parent process will wait for the child to finish in order to continue.
 
 ## Development and Testing Roadmap
