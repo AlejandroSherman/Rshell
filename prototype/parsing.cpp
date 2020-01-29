@@ -16,10 +16,13 @@ int main()
 	string delimiter = "&&";
 	unsigned int position = 0; 
 	string word;
-	
+		
 	position = userinput.find(delimiter);	
 	word = userinput.substr(0, position); //capture word from position 0 to delimiter
 	cout << word << endl; 
+	
+	if (word == "ls -a") 
+		system("ls -a");
 	userinput.erase(0, position + delimiter.length()); //erase the word from whole string
 	cout << userinput << endl;
 	return 0;
