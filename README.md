@@ -88,3 +88,4 @@ A class that implements the rshell ";" connector
 * During the use of rshell, when a new command is received, the parent process will fork and create a new child process, which will then execute parse using a different delimiter to separate the user commands into different tokens. According to the tokens received, commands will be sent to different classes for further actions. While the process is being executed by the child, the parent process will wait for the child to finish in order to continue.
 
 ## Development and Testing Roadmap
+[#1](../../issues/1) Implement Base Class
