@@ -89,11 +89,19 @@ A class that implements the rshell ";" connector
 
 ## Development and Testing Roadmap
 [#1](../../issues/1) Implement and test: Base Class
-[#1](../../issues/2) Implement and test: Connector
-[#1](../../issues/3) Implement and test: Command
-[#1](../../issues/4) Implement and test: Exit
-[#1](../../issues/5) Implement and test: Comment
-[#1](../../issues/6) Implement and test: And
-[#1](../../issues/7) Implement and test: Or
-[#1](../../issues/8) Implement and test: Semi
-[#1](../../issues/9) Implement and test: User(main)
+
+[#2](../../issues/2) Implement and test: Connector
+
+[#3](../../issues/3) Implement and test: Command
+
+[#4](../../issues/4) Implement and test: Exit
+
+[#5](../../issues/5) Implement and test: Comment
+
+[#6](../../issues/6) Implement and test: And
+
+[#7](../../issues/7) Implement and test: Or
+
+[#8](../../issues/8) Implement and test: Semi
+
+[#9](../../issues/9) Implement and test: User(main)
