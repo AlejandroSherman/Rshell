@@ -39,3 +39,5 @@ parsing
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
+cmake_install.cmake
+Makefile
