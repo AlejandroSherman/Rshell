@@ -15,7 +15,7 @@ public:
   Command(string input){
     cmd = input;
   }
-  virtual bool execute { //perhaps this function could see waht the command is, and if it's valid, return true and then execute the command, and if invalid return a false
+  virtual bool execute { //perhaps this function could see what the command is, and if it's valid, return true and then execute the command, and if invalid return a false
 }
 };
 
