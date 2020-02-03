@@ -13,12 +13,12 @@ protected:
   Base* left;
   Base* right;
 public:
-  Connector() { }
+  Connector() { };
   Connector(Base* lhs, Base* rhs) {
   left = lhs;
   right = rhs;
   }
-  virtual bool execute() = 0;
+  virtual bool execute(string) = 0;
 };
 
 #endif
