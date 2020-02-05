@@ -5,10 +5,11 @@
 #include <string>
 string checkSpace(string);
 
-void Base::parsing(string userinput)
+vector<string> Base::parsing(string userinput)
 {
-	size_t pos = 0; 
-	string word; 
+	size_t pos = 0;
+	string word;
+	vector <string> x;
 	while(true)
 	{
 		userinput = checkSpace(userinput);
@@ -18,13 +19,16 @@ void Base::parsing(string userinput)
 		{
 			word = userinput;
 			if(userinput != "")//check if last word is emepty
-				cout << word << endl; //last word received
-			break;
+				//cout << word << endl; //last word received
+				x.push_back(word);
+				return x;
+			//break;
 		}
 		else
 		{
 			word = userinput.substr(0,pos);
-			cout << word << endl; //send word to other function
+			x.push_back(word);
+			//cout << word << endl; //send word to other function
 			userinput = userinput.erase(0,pos+delimiter.length());
 		}
 	}

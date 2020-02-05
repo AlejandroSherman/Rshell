@@ -11,6 +11,12 @@ int main()
 	getline(cin,userinput);
 	Base *input = new And();
 
-	input->parsing(userinput);
+
+	vector <string> tokens = (input->parsing(userinput));
+	cout << "Size of tokens vector is: " << tokens.size() << endl;
+	cout << "Contents of tokens vector are:" << endl;
+	for (int i = 0; i < tokens.size(); ++i){
+		cout << tokens.at(i) << endl;
+	}
 	return 0;
 }
