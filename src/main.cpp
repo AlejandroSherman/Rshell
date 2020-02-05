@@ -6,11 +6,11 @@ using namespace std;
 
 int main()
 {
-	cout <<"$ ";
+	cout <<"guest@rshell:~$ ";
 	string userinput;
 	getline(cin,userinput);
 	Base *input = new And();
-	
+
 	input->parsing(userinput);
 	return 0;
 }
