@@ -3,12 +3,13 @@
 
 using namespace std;
 #include <string>
+#include <vector>
 class Base {
     public:
         /* Constructor */
         Base() { };
 
-	void parsing(string);
+	vector<string> parsing(string);
         /* Virtual Functions */
         virtual bool execute(string) = 0;
 };
