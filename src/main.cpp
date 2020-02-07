@@ -4,6 +4,11 @@
 #include<string>
 using namespace std;
 
+string command_plus_flag(string cmd, string flag){
+	result = cmd + " " + flag;
+	return result;
+}
+
 int main()
 {
 	cout <<"guest@rshell:~$ ";
@@ -19,8 +24,10 @@ int main()
 		cout << tokens.at(i) << endl;
 	}
 
- vector <string> valid_commands {"ls", "mkdir", "echo", "exit", "git", "cd", "#"};
+ vector <string> valid_commands {"ls", "mkdir", "echo", "git", "cd"}; //exit and comment are special and are handled in the parser
  vector <string> valid_flags{"-a", "-e", "-d", "-lR", "/"};
+
+
 
 	return 0;
 }
