@@ -10,12 +10,14 @@ class Base;
 class Command : public Base {
 protected:
   string cmd;
+  string arg;
 public:
   Command();
-  Command(string input){
+  Command(string input, string argument){
     cmd = input;
+    arg = argument;
 }
-  virtual bool execute () = 0; //perhaps this function could see what the command is, and if it's valid, return true and then execute the command, and if invalid return a false
+  virtual bool execute ();
 
 };
 
