@@ -39,6 +39,7 @@ int main()
  //here check if tokens.at(pos) is an operator.
  //if it is take note of it and do something with it later
  //continue to collect the rest of the commands
+ //once all of tokens has been handled, go through the vector of commands and execute them using their execute fuction, and do so based on the connectors that have been entered (if any)
 }
 
 	return 0;
