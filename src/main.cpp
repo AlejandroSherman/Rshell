@@ -40,7 +40,7 @@ int main()
  }
 cout << "The command to be passed is: "<< command << endl;
 pos = pos+1;
-string new_command;
+string new_command = "";
 
 for (int i = 0; i < valid_flags.size(); ++i){
 	if (valid_flags.at(i) == tokens.at(pos)){
@@ -49,6 +49,10 @@ for (int i = 0; i < valid_flags.size(); ++i){
 	}
 }
 
+if (new_command == ""){
+	new_command = command;
+	pos = pos-1;
+}
 cout << "Now the command is :" << new_command << endl;
 pos = pos+1;
 string argument = tokens.at(pos);
