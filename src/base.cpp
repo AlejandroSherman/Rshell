@@ -1,5 +1,5 @@
-#ifndef _BASE_H_
-#define _BASE_H_
+#ifndef _BASE_CPP_
+#define _BASE_CPP_
 #include "../header/base.h"
 #include <iostream>
 #include <string>
