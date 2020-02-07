@@ -10,12 +10,14 @@ class Base;
 class Command : public Base {
 protected:
   string cmd;
+  string arg;
 public:
   Command();
-  Command(string input){
+  Command(string input, string argument){
     cmd = input;
+    arg = argument;
 }
-  virtual bool execute (string argument); 
+  virtual bool execute ();
 
 };
 
