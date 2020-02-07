@@ -18,5 +18,9 @@ int main()
 	for (int i = 0; i < tokens.size(); ++i){
 		cout << tokens.at(i) << endl;
 	}
+
+ vector <string> valid_commands {"ls", "mkdir", "echo", "exit", "git", "cd", "#"};
+ vector <string> valid_flags{"-a", "-e", "-d", "-lR", "/"};
+
 	return 0;
 }
