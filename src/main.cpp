@@ -4,52 +4,13 @@
 #include<string>
 using namespace std;
 
-string command_plus_flag(string cmd, string flag){
-	string result = cmd + " " + flag;
-	return result;
-}
+string command_plus_flag(string cmd, string flag);
 
-string find_command(vector<string> &tokens, vector<string> commands, int &index){
-	string command = "";
-	for (int i = 0; i < tokens.size(); ++i){
- 	 for (int j = 0; j < commands.size(); ++j){
- 		 if (tokens.at(i) == commands.at(j)){
- 			 command = tokens.at(i);
- 			 index = i+1;
-			 tokens.at(i) = "";
-			 return command;
- 		 }
- 	 }
-  }
-	return command;
-}
+string find_command(vector<string> &tokens, vector<string> commands, int &index);
 
-string update_command(vector<string> &tokens, vector<string> flags, string curr_command, int &pos){
-  string new_command = curr_command;
-	for (int i = 0; i < flags.size(); ++i){
-		if (flags.at(i) == tokens.at(pos)){
-			new_command = command_plus_flag(curr_command, flags.at(i));
-			tokens.at(pos) = "";
-			pos = pos+1;
-			return new_command;
-		}
-	}
-	return new_command;
-}
+string update_command(vector<string> &tokens, vector<string> flags, string curr_command, int &pos);
 
-string set_argument(vector<string> &tokens, vector<string> commands, int &pos){
-	string argument = "";
-	for (; pos < tokens.size(); ++pos){
-	for (int i = 0; i < commands.size(); ++i){
-		if (tokens.at(pos) == commands.at(i)){
-			return argument;
-		}
-	}
-	argument = argument + " " + tokens.at(pos);
-	tokens.at(pos) = "";
-  }
-	return argument;
-}
+string set_argument(vector<string> &tokens, vector<string> commands, int &pos);
 
 int main()
 {
@@ -112,4 +73,51 @@ for (int i = 0; i < tokens.size(); ++i){
 //still a work in progress, feel free to add and change things as you see fit
 
 	return 0;
+}
+
+string command_plus_flag(string cmd, string flag){
+	string result = cmd + " " + flag;
+	return result;
+}
+
+string find_command(vector<string> &tokens, vector<string> commands, int &index){
+	string command = "";
+	for (int i = 0; i < tokens.size(); ++i){
+ 	 for (int j = 0; j < commands.size(); ++j){
+ 		 if (tokens.at(i) == commands.at(j)){
+ 			 command = tokens.at(i);
+ 			 index = i+1;
+			 tokens.at(i) = "";
+			 return command;
+ 		 }
+ 	 }
+  }
+	return command;
+}
+
+string update_command(vector<string> &tokens, vector<string> flags, string curr_command, int &pos){
+  string new_command = curr_command;
+	for (int i = 0; i < flags.size(); ++i){
+		if (flags.at(i) == tokens.at(pos)){
+			new_command = command_plus_flag(curr_command, flags.at(i));
+			tokens.at(pos) = "";
+			pos = pos+1;
+			return new_command;
+		}
+	}
+	return new_command;
+}
+
+string set_argument(vector<string> &tokens, vector<string> commands, int &pos){
+	string argument = "";
+	for (; pos < tokens.size(); ++pos){
+	for (int i = 0; i < commands.size(); ++i){
+		if (tokens.at(pos) == commands.at(i)){
+			return argument;
+		}
+	}
+	argument = argument + " " + tokens.at(pos);
+	tokens.at(pos) = "";
+  }
+	return argument;
 }
