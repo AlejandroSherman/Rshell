@@ -37,6 +37,20 @@ string update_command(vector<string> &tokens, vector<string> flags, string curr_
 	return new_command;
 }
 
+string set_argument(vector<string> &tokens, vector<string> commands, int &pos){
+	string argument = "";
+	for (; pos < tokens.size(); ++pos){
+	for (int i = 0; i < commands.size(); ++i){
+		if (tokens.at(pos) == commands.at(i)){
+			return argument;
+		}
+	}
+	argument = argument + " " + tokens.at(pos);
+	tokens.at(pos) = "";
+  }
+	return argument;
+}
+
 int main()
 {
 	cout <<"guest@rshell:~$ ";
@@ -73,7 +87,7 @@ command = find_command(tokens, valid_commands, pos);
 
  cout << "The command to be passed is: "<< command << endl;
 
- cout << "Contents of tokens vector now are:" << endl;
+ cout << endl << "Contents of tokens vector now are:" << endl;
  for (int i = 0; i < tokens.size(); ++i){
 	 cout << tokens.at(i) << endl;
  }
@@ -81,12 +95,19 @@ command = find_command(tokens, valid_commands, pos);
 
  command = update_command(tokens, valid_flags, command, pos);
  cout << "Now the command is: " << command << endl;
- cout << "Contents of tokens vector now are:" << endl;
+ cout << endl << "Contents of tokens vector now are:" << endl;
  for (int i = 0; i < tokens.size(); ++i){
  	cout << tokens.at(i) << endl;
  }
 
-
+string argument;
+argument = set_argument(tokens, valid_commands, pos);
+argument.erase(0, 1); //argument always has a leading whitespace, removing it here
+cout << "The command to be created is :" << command << " with argument: " << argument << endl;
+cout << endl << "Contents of tokens vector now are:" << endl;
+for (int i = 0; i < tokens.size(); ++i){
+ cout << tokens.at(i) << endl;
+}
 // pos = pos+1;
 // string new_command = "";
 //
