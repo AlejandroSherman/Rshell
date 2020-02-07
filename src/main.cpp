@@ -68,24 +68,14 @@ int main()
 
  vector <string> valid_commands {"ls", "mkdir", "echo", "git", "cd"}; //exit and comment are special and are handled in the parser
  vector <string> valid_flags{"-a", "-e", "-d", "-lR", "/"};
+ vector <string> valid_anything{"ls", "mkdir", "echo", "git", "cd", "exit", "#", "&&", "||", ";"};
  string command;
  int pos;
 
- // for (int i = 0; i < tokens.size(); ++i){
-	//  for (int j = 0; j < valid_commands.size(); ++j){
-	// 	 if (tokens.at(i) == valid_commands.at(j)){
-	// 		 command = tokens.at(i);
-	// 		 pos = i;
-	// 		 break;
-	// 	 }
-	//  }
- // }
 
-command = find_command(tokens, valid_commands, pos);
+ command = find_command(tokens, valid_commands, pos);
 
-
-
- cout << "The command to be passed is: "<< command << endl;
+ cout << endl << "The command to be passed is: "<< command << endl;
 
  cout << endl << "Contents of tokens vector now are:" << endl;
  for (int i = 0; i < tokens.size(); ++i){
@@ -94,46 +84,27 @@ command = find_command(tokens, valid_commands, pos);
  //the current index of pos is the one after the previously found command
 
  command = update_command(tokens, valid_flags, command, pos);
- cout << "Now the command is: " << command << endl;
+ cout << endl << "Now the command is: " << command << endl;
  cout << endl << "Contents of tokens vector now are:" << endl;
  for (int i = 0; i < tokens.size(); ++i){
  	cout << tokens.at(i) << endl;
  }
 
 string argument;
-argument = set_argument(tokens, valid_commands, pos);
+argument = set_argument(tokens, valid_anything, pos);
 argument.erase(0, 1); //argument always has a leading whitespace, removing it here
-cout << "The command to be created is :" << command << " with argument: " << argument << endl;
+cout << endl << "The command to be created is: " << command << " with argument: " << argument << endl;
 cout << endl << "Contents of tokens vector now are:" << endl;
 for (int i = 0; i < tokens.size(); ++i){
  cout << tokens.at(i) << endl;
 }
-// pos = pos+1;
-// string new_command = "";
-//
-// for (int i = 0; i < valid_flags.size(); ++i){
-// 	if (valid_flags.at(i) == tokens.at(pos)){
-// 		new_command = command_plus_flag(command, valid_flags.at(i));
-// 		break;
-// 	}
-// }
-//
-// if (new_command == ""){
-// 	new_command = command;
-// 	pos = pos-1;
-// }
-// cout << "Now the command is :" << new_command << endl;
-// pos = pos+1;
-// string argument = tokens.at(pos);
-//
-// cout << "The command to be created is :" << new_command << " with argument: " << argument << endl;
-//Only works with one word arguments, need a way to know when the argument ends and another connector or command begins
-//Still in preliminary stage
+
+//Now works with multiple word arguments, and can tell when it encounters another command or connector
 //Once working I think at this point we could create a new command like:
-// Base task* = new Command(new_command, argument);
-//Maybe we can make the steps done above into a function that trys to do this for all commands in the tokens vector
-//and perhaps a connector can do it's own steps and perform the command steps for it's left and right side
-//still unsure how it'll all come together lol
+// Base task* = new Command(command, argument);
+//Need this whole process to eventually be put into a loop or a fork to handle the entire line of tokens
+//connector needs it's own functions still so it can do it's own steps and perform the command steps for it's left and right side
+//still a work in progress, feel free to add and change things as you see fit
 
 	return 0;
 }
