@@ -2,15 +2,19 @@
 #define _EXIT_H_
 #include "command.h"
 #include <string>
+using namespace std;
 
 class Exit : public Command
 {
 private:
+	string wd;
 public:
-	Exit(){};
-	bool execute(string word)
+	Exit(string word){
+		wd = word;
+	};
+	bool execute()
 	{
-		if(word == "exit")
+		if(wd == "exit")
 			exit(0);
 		else
 			return true;

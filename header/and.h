@@ -10,7 +10,7 @@ private:
 
 public:
 	And(){};
-	bool execute(string){return false;}
+	bool execute(){return false;}
 };
 
 #endif
