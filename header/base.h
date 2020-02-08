@@ -11,7 +11,7 @@ class Base {
 
 	vector<string> parsing(string);
         /* Virtual Functions */
-        virtual bool execute(string) = 0;
+        virtual bool execute() = 0;
 };
 
 #endif

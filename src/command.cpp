@@ -5,10 +5,10 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 bool Command::execute(){
- //this funciton does a system call (and fork??) of the protected command and executes the command
- //passes into the system call the protected argument (Argument can be empty!)
-//if succeeds return true, if fails return false
+ cout << "command object here!" << endl << "My command is: " << cmd << endl << "My argument is: " << arg << endl;
 }
 
 #endif

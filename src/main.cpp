@@ -12,7 +12,7 @@ string update_command(vector<string> &tokens, vector<string> flags, string curr_
 
 string set_argument(vector<string> &tokens, vector<string> commands, int &pos);
 
-string command_creator(vector<string> &tokens, int &pos);
+Command* command_creator(vector<string> &tokens, int &pos);
 //Command creation function, gets command, flag, and arguments for one command and leaves blank spaces in the token vector ...
 //where these used to be.
 //This function currently returns a string of the command and it's argument, but this function should actually return a new command object
@@ -31,16 +31,21 @@ int main()
   vector <string> tokens = (input->parsing(userinput));
 	int pos = 0;
 
+  vector <Command*> command_objects;
+
  while(pos < tokens.size()){ //Keeps looking for commands untill all of tokens has been viewed
- string command_and_argument = command_creator(tokens, pos);
- cout << "The command and argument is: " << command_and_argument << endl;
- cout << "This function should actually create a command that can be executed in a fork" << endl;
+ //string command_and_argument = command_creator(tokens, pos);
+ //cout << "The command and argument is: " << command_and_argument << endl;
+ //cout << "This function should actually create a command that can be executed in a fork" << endl;
+ command_objects.push_back(command_creator(tokens, pos));
  //place the returned command into a vector of commands
  //here check if tokens.at(pos) is an operator.
  //if it is take note of it and do something with it later
  //continue to collect the rest of the commands
  //once all of tokens has been handled, go through the vector of commands and execute them using their execute fuction, and do so based on the connectors that have been entered (if any)
 }
+
+ command_objects.at(0)->execute();
 
 	return 0;
 }
@@ -92,7 +97,7 @@ string set_argument(vector<string> &tokens, vector<string> commands, int &pos){
 	return argument;
 }
 
-string command_creator(vector<string> &tokens, int &pos){
+Command* command_creator(vector<string> &tokens, int &pos){
 	vector <string> valid_commands {"ls", "mkdir", "echo", "git", "cd"}; //exit and comment are special and are handled in the parser
   vector <string> valid_flags{"-a", "-e", "-d", "-lR", "/"};
   vector <string> valid_anything{"ls", "mkdir", "echo", "git", "cd", "exit", "#", "&&", "||", ";"};
@@ -135,8 +140,8 @@ for (int i = 0; i < tokens.size(); ++i){
  cout << tokens.at(i) << endl;
 }
 
-command = command + " argument: " + argument;
-return command;
+//command = command + " argument: " + argument;
+return new Command(command,argument);
 
 //Now works with multiple commands
 //Now works with multiple word arguments, and can tell when it encounters another command or connector
