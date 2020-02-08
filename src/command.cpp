@@ -6,7 +6,7 @@
 #include <string>
 
 bool Command::execute(){
- //this funciton does a system call (and fork??) of the protected command
+ //this funciton does a system call (and fork??) of the protected command and executes the command
  //passes into the system call the protected argument (Argument can be empty!)
 //if succeeds return true, if fails return false
 }
