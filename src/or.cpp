@@ -1,21 +1,19 @@
 #ifndef __OR_CPP__
 #define __OR_CPP__
 
+#include "../header/or.h"
 #include "../header/base.h"
 #include "../header/connector.h"
-#inlcude <iostream>
+#include <iostream>
 
 using namespace std;
 
 class Base;
+class Connector;
 
-class Or : public Connector {
-public:
-  Or() { }
-  Or(Base *left, Base *right) : Connector(left, right) { }
-  bool execute() {
-    return (left->execute()) || (right->execute());
-  }
-};
+
+bool Or::execute() {
+  return (left->execute()) || (right->execute());
+}
 
 #endif

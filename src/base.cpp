@@ -5,8 +5,8 @@
 #include <string>
 string checkSpace(string);
 
-vector<string> Base::parsing(string userinput)
-{
+vector<string> Base::parsing(string userinput) //parser needs to be updated to separate a ";" to it's own token
+{ //parser needs to know when a "#" is found so the rest of the input is ignored, parser also needs to have anything that is between quotations to be treated as one token
 	size_t pos = 0;
 	string word;
 	vector <string> x;

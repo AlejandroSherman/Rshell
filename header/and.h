@@ -9,8 +9,9 @@ class And:public Connector{
 private:
 
 public:
-	And(){};
-	bool execute(){return false;}
+	And(){ }
+	And(Base *left, Base *right) : Connector(left, right) { }
+	bool execute();
 };
 
 #endif
