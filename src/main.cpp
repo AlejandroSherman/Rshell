@@ -24,7 +24,8 @@ Command* command_creator(vector<string> &tokens, int &pos);
 
 
 int main() //compile in ubunutu with: g++ main.cpp base.cpp command.cpp and.cpp or.cpp semi.cpp, and then do: ./a.out
-{ //example input: cd -e hello there && ls -a how are you doing
+{ //or alternatively, install cmake into ubunutu and run cmake . then make and then run ./rshell (./test doesn't function yet)
+	//example input: cd -e hello there && ls -a how are you doing... try others as well
 	cout <<"guest@rshell:~$ ";
 	string userinput;
 	getline(cin,userinput);
@@ -183,6 +184,7 @@ argument.erase(0, 1); //argument always has a leading whitespace, removing it he
 // }
 
 //command = command + " argument: " + argument;
+
 //if (command == "exit"){//untested
 	//return new Exit(command);
 //}
