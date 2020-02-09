@@ -23,9 +23,9 @@ Command* command_creator(vector<string> &tokens, int &pos);
 
 
 
-int main() //compile in ubunutu with: g++ main.cpp base.cpp command.cpp and.cpp or.cpp semi.cpp, and then do: ./a.out
-{ //or alternatively, install cmake into ubunutu and run cmake . then make and then run ./rshell (./test doesn't function yet)
-	//example input: cd -e hello there && ls -a how are you doing... try others as well
+int main() //*****compile in ubunutu with: g++ main.cpp base.cpp command.cpp and.cpp or.cpp semi.cpp, and then do: ./a.out*****
+{ //*****or alternatively, install cmake into ubunutu and run cmake . then make and then run ./rshell (./test doesn't function yet)*****
+	//*****example input: cd -e hello there && ls -a how are you doing... try others as well*****
 	cout <<"guest@rshell:~$ ";
 	string userinput;
 	getline(cin,userinput);
@@ -41,6 +41,16 @@ int main() //compile in ubunutu with: g++ main.cpp base.cpp command.cpp and.cpp 
 	for (int i = 0; i < tokens.size(); ++i){
 	 cout << tokens.at(i) << endl;
 	}
+
+	if(tokens.at(tokens.size()-1) == "&&"){//fixes an error that occurs when an operator is the last thing entered
+ 	 tokens.resize(tokens.size()-1);
+  }
+  else if (tokens.at(tokens.size()-1) == "||"){
+ 	 tokens.resize(tokens.size()-1);
+  }
+  else if (tokens.at(tokens.size()-1) == ";"){
+ 	 tokens.resize(tokens.size()-1);
+  }
 
  while(pos < tokens.size()){ //Keeps looking for commands untill all of tokens has been viewed
  command_objects.push_back(command_creator(tokens, pos)); //the command is placed into a vector of commands
@@ -59,30 +69,38 @@ int main() //compile in ubunutu with: g++ main.cpp base.cpp command.cpp and.cpp 
  command_objects.at(0)->execute();
 }
  else { //There are operators, execute them in order
- int c1 = 0;
- int c2 = 1;
  vector <Connector*> connector_objects;
- for (int i = 0; i < operators.size(); ++i){
+
+ if(operators.at(0) == "&&"){//create the first operator
+	 connector_objects.push_back(new And(command_objects.at(0), command_objects.at(1)));
+ }
+ else if (operators.at(0) == "||"){
+	 connector_objects.push_back(new Or(command_objects.at(0), command_objects.at(1)));
+ }
+ else if (operators.at(0) == ";"){
+	 connector_objects.push_back(new Semi(command_objects.at(0), command_objects.at(1)));
+ }
+ int com_loc = 2;
+
+ for (int i = 1; i < operators.size(); ++i){ //the rest of the operators are created
 	 if(operators.at(i) == "&&"){
-		 connector_objects.push_back(new And(command_objects.at(c1), command_objects.at(c2)));
-		 c1 = c1+1;
-		 c2 = c2+1;
+		 connector_objects.push_back(new And(connector_objects.at(i-1), command_objects.at(com_loc)));
+		 com_loc++;
 	 }
 	 else if (operators.at(i) == "||"){
-		 connector_objects.push_back(new Or(command_objects.at(c1), command_objects.at(c2)));
-		 c1 = c1+1;
-		 c2 = c2+1;
+		 connector_objects.push_back(new Or (connector_objects.at(i-1), command_objects.at(com_loc)));
+		 com_loc++;
 	 }
 	 else if (operators.at(i) == ";"){
-		 connector_objects.push_back(new Semi(command_objects.at(c1), command_objects.at(c2)));
-		 c1 = c1+1;
-		 c2 = c2+1;
+		 connector_objects.push_back(new Semi(connector_objects.at(i-1), command_objects.at(com_loc)));
+		 com_loc++;
 	 }
  }
+   connector_objects.at(connector_objects.size()-1)->execute();
  //should now have a vector of operators, execute them
- for (int i = 0; i < connector_objects.size(); ++i){
-	 connector_objects.at(i)->execute();
- }
+ //for (int i = 0; i < connector_objects.size(); ++i){
+	 //connector_objects.at(i)->execute();
+// }
  }
 
  cout << endl << "The tokens vector at the end is: " << endl; //Show what is inside the tokens vector
@@ -185,7 +203,7 @@ argument.erase(0, 1); //argument always has a leading whitespace, removing it he
 
 //command = command + " argument: " + argument;
 
-//if (command == "exit"){//untested
+//if (command == "exit"){//*****untested*****
 	//return new Exit(command);
 //}
 return new Command(command,argument);
@@ -193,5 +211,5 @@ return new Command(command,argument);
 //Now works with multiple commands
 //Now works with multiple word arguments, and can tell when it encounters another command or connector
 // can be changed if needed
-// needs to be updated to handle "exit"
+// *****needs to be updated to handle "exit"*****
 }
