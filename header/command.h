@@ -12,7 +12,7 @@ protected:
   string cmd;
   string arg;
 public:
-  Command();
+  Command(){ }
   Command(string input, string argument){
     cmd = input;
     arg = argument;

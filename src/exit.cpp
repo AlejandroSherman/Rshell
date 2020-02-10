@@ -4,11 +4,11 @@
 #define _EXIT_CPP_
 #include <string>
 #include <iostream>
-#include "exit.hpp"
-using namespace std; 
+#include "exit.h"
+using namespace std;
 
-bool exit::execute(string word){
-	if(word == "exit")
+bool exit::execute(){
+	if(wd == "exit")
 		exit(0);
 	else
 		return true;

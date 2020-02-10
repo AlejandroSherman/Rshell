@@ -1,21 +1,19 @@
 #ifndef __AND_CPP__
 #define __AND_CPP__
 
+#include "../header/and.h"
 #include "../header/base.h"
 #include "../header/connector.h"
-#inlcude <iostream>
+#include <iostream>
 
 using namespace std;
 
 class Base;
+class Connector;
 
-class And : public Connector {
-public:
-  And() { }
-  And(Base *left, Base *right) : Connector(left, right) { }
-  bool execute() {
-    return (left->execute()) && (right->execute());
-  }
-};
+
+bool And::execute() {
+  return (left->execute()) && (right->execute());
+}
 
 #endif

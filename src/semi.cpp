@@ -1,22 +1,20 @@
 #ifndef __SEMI_CPP__
 #define __SEMI_CPP__
 
+#include "../header/semi.h"
 #include "../header/base.h"
 #include "../header/connector.h"
-#inlcude <iostream>
+#include <iostream>
 
 using namespace std;
 
 class Base;
+class Connector;
 
-class Semi : public Connector {
-public:
-  Semi() { }
-  Semi(Base *left, Base *right) : Connector(left, right) { }
-  bool execute() {
-     left->execute();
-     return right->execute();
-  }
-};
+
+bool Semi::execute() {
+  left->execute();
+  return right->execute();
+}
 
 #endif

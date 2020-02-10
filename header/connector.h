@@ -18,7 +18,7 @@ public:
   left = lhs;
   right = rhs;
   }
-  virtual bool execute(string) = 0;
+  virtual bool execute() = 0;
 };
 
 #endif
