@@ -11,23 +11,23 @@ string found_quotation(string, size_t, vector<string>&);
 string found_quotation(string userinput, size_t pos1, vector<string>& x) // pos1 is the first quotation, pos2 is the second quotation if found
 {
 	size_t pos2;
-	pos2 = userinput.find('"', pos1 + 1); // try to find the second quotation 
+	pos2 = userinput.find('"', pos1 + 1); // try to find the second quotation
 	// if second quotation found
 	// push first quotation
 	// push contents btw quotation
 	// push second quotation
 	if (pos2 != string::npos)
 	{
-		x.push_back("\"");
+		//x.push_back("\"");temporarily removed these lines to see what the arguments looked like
 		x.push_back(userinput.substr(pos1 + 1, pos2 - pos1 - 1));
-		x.push_back("\"");
+		//x.push_back("\"");temporarily removed these lines to see what the arguments looked like
 		userinput = userinput.erase(pos1, pos2 - pos1 + 1);
 		userinput = checkSpace(userinput);
 	}
 	return userinput;
 }
-vector<string> Base::parsing(string userinput) //*****parser needs to be updated to separate a ";" to it's own token*****
-{ //*****parser needs to know when a "#" is found so the rest of the input is ignored, parser also needs to have anything that is between quotations to be treated as one token*****
+vector<string> Base::parsing(string userinput)
+{
 	size_t pos = 0, pos_quote = 0;
 	string word;
 	vector <string> x;

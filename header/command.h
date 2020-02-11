@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "base.h"
+#include <vector>
 using namespace std;
 
 class Base;
@@ -10,12 +11,12 @@ class Base;
 class Command : public Base {
 protected:
   string cmd;
-  string arg;
+  vector<string> args;
 public:
   Command(){ }
-  Command(string input, string argument){
+  Command(string input, vector<string> arguments){
     cmd = input;
-    arg = argument;
+    args = arguments;
 }
   virtual bool execute ();
 

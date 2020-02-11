@@ -8,10 +8,14 @@
 
 using namespace std;
 
-bool Command::execute(string command, vector<string> x) {
-    //*****This needs to be changed to make a fork and execute the command by passing in it's argument (return true if succeeds and false if fails)*****
-    // need to receive command and its argument
-    //cout << endl << "command object here!" << endl << "My command is: " << cmd << endl << "My argument is: " << arg << endl;
+bool Command::execute() {
+   //vector<string> x;
+    cout << "command object here!" << endl << "My command is: " << cmd << " My arguments are: ";
+    for(int i = 0; i < args.size(); ++i){
+      cout << args.at(i)<< " ";
+    }
+    cout << endl;
+    /*
     bool result = true;
     char* arg[500];
     cout << endl;
@@ -50,6 +54,7 @@ bool Command::execute(string command, vector<string> x) {
 
     }
     return result;
+    */
 }
 
 #endif
