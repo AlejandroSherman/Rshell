@@ -1,5 +1,5 @@
 //stub of exit command file
-
+// this file is not needed
 #ifndef _EXIT_CPP_
 #define _EXIT_CPP_
 #include <string>

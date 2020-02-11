@@ -12,12 +12,12 @@ public:
 	Exit(string word){
 		wd = word;
 	};
-	bool execute()
-	{
+	bool execute(){
 		if(wd == "exit")
-			exit(0);
-		else
-			return true;
+		exit(0);
+		//cout << "This is exit here, I would be exiting now" << endl;
+		//else
+			//return true;
 	}
 };
 #endif
