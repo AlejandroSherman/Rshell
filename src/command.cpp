@@ -17,6 +17,7 @@ bool Command::execute() {
       cout << args.at(i)<< " ";
     }
     cout << "The size of argument vector: " << args.size() << endl;
+  
 
     cout << "Start executing " << endl;
     bool result = true;
@@ -56,6 +57,7 @@ bool Command::execute() {
         }
     }
     return result;
+
 }
 
 #endif
