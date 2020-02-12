@@ -4,7 +4,9 @@
 #include "../header/command.h"
 #include <iostream>
 #include <string>
-
+#include <unistd.h>
+#include <sys/wait.h>
+#include <errno.h>
 
 using namespace std;
 
@@ -15,14 +17,13 @@ bool Command::execute() {
       cout << args.at(i)<< " ";
     }
     cout << endl;
-    /*
     bool result = true;
     char* arg[500];
     cout << endl;
     int i = 0;
-    while (i < x.size())
+    while (i < args.size())
     {
-        arg[i] = (char*)x.at(i).c_str();
+        arg[i] = (char*)args.at(i).c_str();
         i++;
     }
     arg[i] = NULL;
@@ -54,7 +55,6 @@ bool Command::execute() {
 
     }
     return result;
-    */
 }
 
 #endif
