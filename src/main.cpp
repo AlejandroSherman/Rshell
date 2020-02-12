@@ -61,7 +61,7 @@ int main()
   //if last thing entered is an operator promt with > for another command
   if(tokens.at(tokens.size()-1) == "&&"){
  	 //tokens.resize(tokens.size()-1);
-   cout << endl << "> ";
+   cout << "> ";
    string userinput2;
  	 getline(cin,userinput2);
  	 Base *input2 = new Command();
@@ -83,7 +83,7 @@ int main()
   }
   else if (tokens.at(tokens.size()-1) == ";") {
  	 //tokens.resize(tokens.size()-1);
-   cout << endl << "> ";
+   cout << "> ";
    string userinput2;
  	 getline(cin,userinput2);
  	 Base *input2 = new Command();
