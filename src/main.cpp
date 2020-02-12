@@ -136,12 +136,15 @@ Command* command_creator(vector<string> &tokens, int &pos){ //funciton used in m
  pos++;
 
  //the current index of pos is the one after the previously found command
- if (pos >= tokens.size()){ //fixes an issue where if only one command was passed in e.g : "cd" pos would be out of bounds
-	 pos = pos-1;
+ vector<string> argument;
+ if(pos >= tokens.size()){ //fixes an issue where if only one command was passed in e.g : "cd" pos would be out of bounds
+	 //vector<string> argument;
+   argument.push_back(command);
  }
-
-vector<string> argument = set_argument(tokens, valid_anything, pos, command);
-
+else{
+  //vector<string> argument = set_argument(tokens, valid_anything, pos, command);
+  argument = set_argument(tokens, valid_anything, pos, command);
+}
 if (command == "exit"){
 	return new Exit(command);
 }

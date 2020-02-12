@@ -16,6 +16,8 @@ bool Command::execute() {
     for(int i = 0; i < args.size(); ++i){
       cout << args.at(i)<< " ";
     }
+    cout << "The size of argument vector: " << args.size() << endl;
+
     cout << "Start executing " << endl;
     bool result = true;
     char* arg[500];
