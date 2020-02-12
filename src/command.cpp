@@ -16,7 +16,7 @@ bool Command::execute() {
     for(int i = 0; i < args.size(); ++i){
       cout << args.at(i)<< " ";
     }
-    cout << endl;
+    cout << "Start executing " << endl;
     bool result = true;
     char* arg[500];
     cout << endl;
@@ -46,13 +46,12 @@ bool Command::execute() {
             perror("wait() error");
             result = false;
         }
-        if (WIFEXITED(status) != 0)           //if normal, should return 0
+        if (WIFEXITED(status) == false)           //if normal, should return 0
         {
             int exit_status = WEXITSTATUS(status);
-            printf("Exit status of the child was %d\n", exit_status);
+            printf("Exit status of the child was %d/n", exit_status);
             result = false;
         }
-
     }
     return result;
 }
