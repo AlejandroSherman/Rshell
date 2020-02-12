@@ -30,13 +30,13 @@ A class that other frameworks build off of, an abstract base class
 ### Testing
 Less of a class, and more of a representation of the testing frameworks used
 
-* `unit_tests` : individually designed tests made to test specific functions program and ran together using the google test submodule
-* `integration_tests` : I/O tests that test the overall combined functionality of the completed program and has a suite of tests each focusing on a certain combination of features
+* `unit_tests` : individually designed tests made to test specific program functions and are run together using the google test submodule
+* `integration_tests` : I/O tests that mimic the overall combined functionality of the completed program and has a suite of tests each focusing on a certain combination of features
 
 ### command.h
 A class that creates and executes commands, and allows for the special command `exit` to inherit from
 
-* Commands are created in the main using the format `new Command(string, vector<strings)`
+* Commands are created in the main using the format `new Command(string, vector<string>)`
 * `Command() : Base()` + `Command(string, vector<string> ) : Base()`: command constructors
 * On construction the command is passed in as a string, and the arguments are passed in as a vector of strings
 * `execute()` : creates a fork and attempts to execute the command, if succeeds returns true, and returns false otherwise
@@ -79,16 +79,17 @@ A class that implements the rshell ";" connector
 
 * `Semi() : Connector` + `Semi(Base*, Base*) : Connector()` : Semi constructors
 * utilizes the left and right base pointers from the connector class
-* `execute()` : executes the commands according to the semicolon operator, both commands try to execute no matter what
+* `execute()` : executes the commands according to the semicolon operator, both commands attempt to execute
 * commands are executed by utilizing the command class execute
 
 ## Prototypes/Research
 * `fork()` is used to create a new process, called child process
 * under the child process, `execvp()` allows the child process to run a different program
 * `waitpid()` allows the parent process to wait for the child process to finish and terminate before proceeding, this prevents memory leaks and zombie process from happening
-* `WIFEXITED(status)` and `WEXITSTATUS(status)` are helpful functions that can more easily recognize the return status of commands in the program.
-* During the use of rshell, when a new command is executed, the parent process will fork and create a new child process, which will then attempt to perform the command.
-* According to the tokens received, commands will be created and executed depending on if valid or invalid, and what operators are present. While the process is being executed by the child, the parent process will wait for the child to finish in order to continue.
+* `WIFEXITED(status)` and `WEXITSTATUS(status)` are helpful functions that can more easily recognize the return status of commands in the program
+* During the use of rshell, when a new command is executed, the parent process will fork and create a new child process, which will then attempt to perform the command
+* According to the tokens received, commands will be created and executed depending on if they are valid or invalid, and depend on what operators are present
+* While the process is being executed by the child, the parent process will wait for the child to finish in order to continue
 
 ## Development and Testing Roadmap
 [#1](../../issues/1) Implement and test: Base Class
