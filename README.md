@@ -2,90 +2,93 @@
 > Winter 2020 - Alejandro Sherman (862062898) and Ernie Hung (862153636)
 
 ## Introduction
-Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell will allow for the use of standard commands after they are input by a user, such as `exit`, as well as the use of three connectors that allow users to execute multiple commands at once. These connectors are "||" (or), "&&" (and), and ";" (semi). The composite design pattern will be utilized to implement the commands and the connectors. The project will be created in C++ and features will be implemented using C++ classes and functions.
+Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit`, as well as the use of three connectors that allow users to execute multiple commands at once. These connectors are "||" (or), "&&" (and), and ";" (semi). The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions.
 
 ## Diagram
 ![OMT_Diagram]()
 
 ## Classes
-### user.cpp
+### main.cpp
 The area that the user interacts with when they use the shell
 
+* `#includes` all the other classes from the header folder
 * displays the command prompt `guest@rshell:~$`
-* takes the user input and sends it where it needs to go
-* `echo()` : prints the input back to the user
-* `execute()` : a self designed function that performs the desired task
+* takes the user input and executes it according to the general Linux shell functionality
+* user's input is echoed as they type it
 
 ### base.h
-A class that other frameworks build off of
+A class that other frameworks build off of, an abstract base class
 
-* comprised of virtual functions as the class is meant to be used as a superclass
-* `parse()` : parses user input using tokens
-* parse can be rewritten by other classes, but is optional
-* `execute()` : a pure virtual function as every subclass must implement it's own execute function
+* `Base()` : simple constructor
+* comprised of a virtual function and a pure virtual function
+* class is designed to be a superclass only
+* `parsing(string)` : takes user input as a string, parses it, and returns a vector of string tokens
+* subsequent classes inherit parsing
+* any input following pound: `#` are ignored in parsing
+* `execute() = 0;` : a pure virtual function as every subclass must implement it's own execute function
 
-### test.cpp
-A preliminary test of the later `execute` functions and the base class's parse function
+### Testing
+Less of a class, and more of a representation of the testing frameworks used
 
-* `parse()` : inherited from base
-* `execute()` : can be changed to fit various tests
+* `unit_tests` : individually designed tests made to test specific functions program and ran together using the google test submodule
+* `integration_tests` : I/O tests that test the overall combined functionality of the completed program and has a suite of tests each focusing on a certain combination of features
 
 ### command.h
-A class that commands specialize from
+A class that creates and executes commands, and allows for the special command `exit` to inherit from
 
-* utilizes a vector of strings to determine what valid command is to be invoked
-* `Command()` : command constructor
-* `execute()` : a self designed function that performs the desired task
-* `parse()` : a parse function for use specifically in the command architecture
+* Commands are created in the main using the format `new Command(string, vector<strings)`
+* `Command() : Base()` + `Command(string, vector<string> ) : Base()`: command constructors
+* On construction the command is passed in as a string, and the arguments are passed in as a vector of strings
+* `execute()` : creates a fork and attempts to execute the command, if succeeds returns true, and returns false otherwise
+* `parsing(string)` : inherited from the base class
 
 ### connector.h
 A class that connectors specialize from
 
 * utilizes two objects of the base class to account for a left and right of the operator
-* `Connector (Base*, Base*) : Base()` : connector constructor
-* `execute()` : a self designed function that performs the desired task
-* `parse()` : a parse function for use specifically in the connector architecture
+* `Connector() : Base()` + `Connector (Base*, Base*) : Base()` : connector constructors
+* `execute() = 0;` : redeclared as a pure virtual function so that every operator that inherits from this class must define it's own execute
 
-### exit.cpp
+
+### exit.h
 A self designed rshell command to exit the rshell
 
-* `execute()` : a self designed function that exits the rshell
+* an exit object is created in the main when a command is created that has "exit" as the passed in command
+* `execute()` : a self designed function that exits the rshell, done by calling exit(0);
 * inherits command defined features
 * the rshell will keep running until this command is entered
-
-### comment.cpp
-A self designed rshell command flag to indicate to ingore the following input
-
-* `execute()` : a self designed function that ignores anything following the "#"
-* inherits command defined features
-* once a "#" is encountered anything in the following line is treated as empty
 
 ### and.cpp
 A class that implements the rshell "&&" connector
 
-* `execute()` : performs the commands according to the and operator
-* inherits connector defined features
-* must utilize the command class to carry out the commands
+* `And() : Connector` + `And(Base*, Base*) : Connector()` : And constructors
+* utilizes the left and right base pointers from the connector class
+* `execute()` : executes the commands according to the and operator, as such both commands on the left and right only execute when both commands are valid
+* commands are executed by utilizing the command class execute
 
 ### or.cpp
 A class that implements the rshell "||" connector
 
-* `execute()` : performs the commands according to the or operator
-* inherits connector defined features
-* must utilize the command class to carry out the commands
+* `Or() : Connector` + `Or(Base*, Base*) : Connector()` : Or constructors
+* utilizes the left and right base pointers from the connector class
+* `execute()` : executes the commands according to the or operator, only one command executes if it is valid
+* commands are executed by utilizing the command class execute
 
 ### semi.cpp
 A class that implements the rshell ";" connector
 
-* `execute()` : performs the commands according to the semicolon operator
-* inherits connector defined features
-* must utilize the command class to carry out the commands
+* `Semi() : Connector` + `Semi(Base*, Base*) : Connector()` : Semi constructors
+* utilizes the left and right base pointers from the connector class
+* `execute()` : executes the commands according to the semicolon operator, both commands try to execute no matter what
+* commands are executed by utilizing the command class execute
 
 ## Prototypes/Research
-* fork() is used to create a new process, called child process
-* under the child process, execvp() allows the child process to run a different program
-* waitpid() allows the parent process to wait for the child process to finish and terminated before proceeding, this prevents memory leaks and zombie process from happening
-* During the use of rshell, when a new command is received, the parent process will fork and create a new child process, which will then execute parse using a different delimiter to separate the user commands into different tokens. According to the tokens received, commands will be sent to different classes for further actions. While the process is being executed by the child, the parent process will wait for the child to finish in order to continue.
+* `fork()` is used to create a new process, called child process
+* under the child process, `execvp()` allows the child process to run a different program
+* `waitpid()` allows the parent process to wait for the child process to finish and terminate before proceeding, this prevents memory leaks and zombie process from happening
+* `WIFEXITED(status)` and `WEXITSTATUS(status)` are helpful functions that can more easily recognize the return status of commands in the program.
+* During the use of rshell, when a new command is executed, the parent process will fork and create a new child process, which will then attempt to perform the command.
+* According to the tokens received, commands will be created and executed depending on if valid or invalid, and what operators are present. While the process is being executed by the child, the parent process will wait for the child to finish in order to continue.
 
 ## Development and Testing Roadmap
 [#1](../../issues/1) Implement and test: Base Class
@@ -96,7 +99,7 @@ A class that implements the rshell ";" connector
 
 [#4](../../issues/4) Implement and test: Exit
 
-[#5](../../issues/5) Implement and test: Comment
+[#5](../../issues/5) Implement and test: Comment(in parsing)
 
 [#6](../../issues/6) Implement and test: And
 
@@ -104,4 +107,4 @@ A class that implements the rshell ";" connector
 
 [#8](../../issues/8) Implement and test: Semi
 
-[#9](../../issues/9) Implement and test: User(main)
+[#9](../../issues/9) Implement and test: Main(user interface)
