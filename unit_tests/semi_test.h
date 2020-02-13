@@ -57,4 +57,4 @@ TEST(SemiTestSet, semi_False_False)
 	bool result = test->execute();
 	EXPECT_EQ(result, false);
 }
-#endif // !_OR_TEST_H_
+#endif // !_SEMI_TEST_H_

@@ -53,4 +53,4 @@ TEST(ExitTestSet, exit_semi_command)
 	int result = test->execute();
 	EXPECT_EQ(result, 0);
 }
-#endif // !_OR_TEST_H_
+#endif // !_EXIT_TEST_H_
