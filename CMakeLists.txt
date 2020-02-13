@@ -15,6 +15,11 @@ src/semi.cpp
 
 ADD_EXECUTABLE(test 
 unit_tests/unit_test.cpp
+src/base.cpp
+src/command.cpp
+src/and.cpp
+src/or.cpp
+src/semi.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
