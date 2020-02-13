@@ -9,7 +9,7 @@ using namespace std;
 TEST(BaseTestSet, base_normal_parse)
 {
   Base *input = new Command();
-  string userinput = "echo hi how ya doing"
+  string userinput = "echo hi how ya doing";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 5);
   cout << userinput << endl;
@@ -21,7 +21,7 @@ TEST(BaseTestSet, base_normal_parse)
 TEST(BaseTestSet, base_comment_parse)
 {
   Base *input = new Command();
-  string userinput = "echo hi # how ya doing"
+  string userinput = "echo hi # how ya doing";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 2);
   cout << "echo hi" << endl;
@@ -33,7 +33,7 @@ TEST(BaseTestSet, base_comment_parse)
 TEST(BaseTestSet, base_comment_parse2)
 {
   Base *input = new Command();
-  string userinput = "#"
+  string userinput = "#";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 0);
   }
@@ -42,7 +42,7 @@ TEST(BaseTestSet, base_comment_parse2)
 TEST(BaseTestSet, base_semi_parse)
 {
   Base *input = new Command();
-  string userinput = "echo hi; echo bye"
+  string userinput = "echo hi; echo bye";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 5);
   cout << "echo hi ; echo bye" << endl;
@@ -54,7 +54,7 @@ TEST(BaseTestSet, base_semi_parse)
 TEST(BaseTestSet, base_and_parse)
 {
   Base *input = new Command();
-  string userinput = "echo hi && echo bye"
+  string userinput = "echo hi && echo bye";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 5);
   cout << "echo hi && echo bye" << endl;
@@ -66,7 +66,7 @@ TEST(BaseTestSet, base_and_parse)
 TEST(BaseTestSet, base_or_parse)
 {
   Base *input = new Command();
-  string userinput = "echo hi || echo bye"
+  string userinput = "echo hi || echo bye";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 5);
   cout << "echo hi || echo bye" << endl;
@@ -78,7 +78,7 @@ TEST(BaseTestSet, base_or_parse)
 TEST(BaseTestSet, base_quotes_parse)
 {
   Base *input = new Command();
-  string userinput = "echo \"hi && echo bye\" "
+  string userinput = "echo \"hi && echo bye\" ";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 2);
   cout << "echo hi && echo bye" << endl;
