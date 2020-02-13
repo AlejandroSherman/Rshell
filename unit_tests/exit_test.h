@@ -3,6 +3,9 @@
 #define _EXIT_TEST_H_
 using namespace std;
 #include "../header/exit.h"
+#include "../header/or.h"
+#include "../header/semi.h"
+#include "../header/and.h"
 TEST(ExitTestSet, exit_command_execute)
 {
 	vector <string> vec1;
@@ -30,7 +33,7 @@ TEST(ExitTestSet, exit_and_command)
 	vector <string> vec1, vec2;
 	vec1.push_back("exit");
 	vec2.push_back("ls");
-  vec2.push_back("-a")
+  vec2.push_back("-a");
 	Exit* cmd1 = new Exit(vec1.at(0));
   Command* cmd2 = new Command(vec2.at(0), vec2);
 	And* test = new And(cmd1, cmd2);
