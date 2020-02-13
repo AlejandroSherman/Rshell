@@ -36,7 +36,6 @@ TEST(BaseTestSet, base_comment_parse2)
   string userinput = "#";
   vector <string> tokens = (input->parsing(userinput));
   ASSERT_EQ(tokens.size(), 0);
-  }
 }
 
 TEST(BaseTestSet, base_semi_parse)
