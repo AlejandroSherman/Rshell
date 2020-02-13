@@ -41,16 +41,57 @@ int main()
 	}
 } */
 
-  //fixes an error that occurs when an operator is the last thing entered
-	if(tokens.at(tokens.size()-1) == "&&"){
- 	 tokens.resize(tokens.size()-1);
+  //if only an operator is entered output error msg and continue
+	if((tokens.at(tokens.size()-1) == "&&") && (tokens.size()==1)){
+ 	 //tokens.resize(tokens.size()-1);
+   cout << "-bash: syntax error near unexpected token `&&'" << endl;
+   continue;
+  }
+  else if ((tokens.at(tokens.size()-1) == "||") && (tokens.size()==1)){
+ 	 //tokens.resize(tokens.size()-1);
+   cout << "-bash: syntax error near unexpected token `||'" << endl;
+   continue;
+  }
+  else if ((tokens.at(tokens.size()-1) == ";")  && (tokens.size()==1)){
+ 	 //tokens.resize(tokens.size()-1);
+   cout << "-bash: syntax error near unexpected token `;'" << endl;
+   continue;
+  }
+
+  //if last thing entered is an operator promt with > for another command
+  if(tokens.at(tokens.size()-1) == "&&"){
+ 	 //tokens.resize(tokens.size()-1);
+   cout << "> ";
+   string userinput2;
+ 	 getline(cin,userinput2);
+ 	 Base *input2 = new Command();
+   vector <string> tokens2 = (input2->parsing(userinput2));
+   for (int i = 0 ; i < tokens2.size(); ++i){
+    tokens.push_back(tokens2.at(i));
+   }
   }
   else if (tokens.at(tokens.size()-1) == "||"){
- 	 tokens.resize(tokens.size()-1);
+ 	 //tokens.resize(tokens.size()-1);
+   cout << "> ";
+   string userinput2;
+ 	 getline(cin,userinput2);
+ 	 Base *input2 = new Command();
+   vector <string> tokens2 = (input2->parsing(userinput2));
+   for (int i = 0 ; i < tokens2.size(); ++i){
+    tokens.push_back(tokens2.at(i));
+   }
   }
-  else if (tokens.at(tokens.size()-1) == ";"){
- 	 tokens.resize(tokens.size()-1);
-  }
+  else if (tokens.at(tokens.size()-1) == ";") {
+ 	 //tokens.resize(tokens.size()-1);
+   cout << "> ";
+   string userinput2;
+ 	 getline(cin,userinput2);
+ 	 Base *input2 = new Command();
+   vector <string> tokens2 = (input2->parsing(userinput2));
+   for (int i = 0 ; i < tokens2.size(); ++i){
+    tokens.push_back(tokens2.at(i));
+    }
+   }
 
  while(pos < tokens.size()){ //Keeps looking for commands untill all of tokens have been viewed
  command_objects.push_back(command_creator(tokens, pos)); //the command is placed into a vector of commands
@@ -136,12 +177,15 @@ Command* command_creator(vector<string> &tokens, int &pos){ //funciton used in m
  pos++;
 
  //the current index of pos is the one after the previously found command
- if (pos >= tokens.size()){ //fixes an issue where if only one command was passed in e.g : "cd" pos would be out of bounds
-	 pos = pos-1;
+ vector<string> argument;
+ if(pos >= tokens.size()){ //fixes an issue where if only one command was passed in e.g : "cd" pos would be out of bounds
+	 //vector<string> argument;
+   argument.push_back(command);
  }
-
-vector<string> argument = set_argument(tokens, valid_anything, pos, command);
-
+else{
+  //vector<string> argument = set_argument(tokens, valid_anything, pos, command);
+  argument = set_argument(tokens, valid_anything, pos, command);
+}
 if (command == "exit"){
 	return new Exit(command);
 }
