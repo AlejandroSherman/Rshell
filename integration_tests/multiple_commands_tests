@@ -1,1 +1,7 @@
-hi
+ls -a; ls -l
+mkdir family || echo work?
+echo 1 && echo 2
+echa 1 && echo 2
+echa 1 || echo 2
+rmdir family && echo leaving
+exit
