@@ -3,6 +3,6 @@ echo yes
 mkdir dude
 git status
 echo "hi" # && bye
-rm -f dude
+rmdir dude
 ls -a
 exit
