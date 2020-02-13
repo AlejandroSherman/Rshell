@@ -19,7 +19,10 @@ vector<string> Base::parsing(string userinput)
 	while (true)
 	{
 		userinput = checkSpace(userinput); //get rid of front and back space
-
+		if (userinput == "")		//return vector if input is empty string
+			return x;
+		if (userinput.at(0) == '#')	//return vector if # is the first char
+			return x;
 		pos_quote = userinput.find(delimiter_quotation);
 
 		if (userinput.find('"') != string::npos) // if userinput contain '"'
