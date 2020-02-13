@@ -1,1 +1,4 @@
-hi
+exit || ls -a
+exit #keep going
+ls -a; exit
+exit
