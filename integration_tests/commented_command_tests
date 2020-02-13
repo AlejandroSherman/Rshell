@@ -1,1 +1,6 @@
-hi
+ls -l # && echo hi
+echo 1; echo yes # see
+git status && echo fam #ily
+echo 123#456
+ls -a && echo here! #not here 
+exit
