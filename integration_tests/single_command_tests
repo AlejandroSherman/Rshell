@@ -1,2 +1,8 @@
 ls
+echo yes
+mkdir dude
+git status
+echo "hi" # && bye
+rm -f dude
+ls -a
 exit

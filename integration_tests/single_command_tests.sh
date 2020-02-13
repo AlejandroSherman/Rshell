@@ -1,4 +1,5 @@
 #!/bin/bash
 
-echo "Executing ../rshell ls"
+echo "Executing single command test suite"
+
 ../rshell < single_command_tests
