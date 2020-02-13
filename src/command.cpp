@@ -53,7 +53,7 @@ bool Command::execute() {
         int exit_status = WEXITSTATUS(status);
         if (exit_status != 0)           //if normal, should return 0
         {
-            printf("Child failed, exit statlsus of the child was %d\n", exit_status);
+            printf("Child failed, exit status of the child was %d\n", exit_status);
             result = false;
         }
     }
