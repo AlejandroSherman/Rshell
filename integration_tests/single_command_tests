@@ -1,0 +1,8 @@
+ls
+echo yes
+mkdir dude
+git status
+echo "hi" # && bye
+rmdir dude
+ls -a
+exit

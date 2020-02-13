@@ -1,1 +1,5 @@
-#tests primarily for proper exit functionality
+#!/bin/bash
+
+echo "Executing exit command test suite"
+
+../rshell < exit_command_tests
