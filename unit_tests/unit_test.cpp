@@ -10,7 +10,7 @@
 #include "base_test.h"
 #include "command_test.h"
 #include "connector_test.h"
-#include "exit_test.h"
+//#include "exit_test.h"
 #include "or_test.h"
 #include "semi_test.h"
 
