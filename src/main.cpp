@@ -19,7 +19,7 @@ Command* command_creator(vector<string> &tokens, int &pos);
 int main()
 {
   while (true){
-	cout <<"guest@rshell:~$ ";
+	cout <<"$ ";
 	string userinput;
 	getline(cin,userinput);
 
