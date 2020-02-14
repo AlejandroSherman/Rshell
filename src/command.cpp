@@ -38,8 +38,8 @@ bool Command::execute() {
         perror("fork() error");
 
     else if (pid == 0) {                    //child process
-        if (execvp(arg[0], arg) == -1) {      //error on execvp
-            perror("Execvp returned, error execvp");
+        if (execvp(cmd_exe, arg) == -1) {      //error on execvp
+            printf("%s: command not found\n", cmd_exe);
             exit(1);
         }
     }
@@ -53,7 +53,8 @@ bool Command::execute() {
         int exit_status = WEXITSTATUS(status);
         if (exit_status != 0)           //if normal, should return 0
         {
-            printf("Child failed, exit status of the child was %d\n", exit_status);
+            if (!(exit_status == 1 || exit_status == 2)) 
+                printf("Child failed, exit status of the child was %d\n", exit_status);
             result = false;
         }
     }
