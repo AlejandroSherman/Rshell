@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 string checkSpace(string);
-string found_connector(string, int, vector<string>&, string);
+string found_connector(string, size_t, vector<string>&, string);
 string found_quotation(string, size_t, vector<string>&);
 
 vector<string> Base::parsing(string userinput)
@@ -19,18 +19,18 @@ vector<string> Base::parsing(string userinput)
 	while (true)
 	{
 		userinput = checkSpace(userinput); //get rid of front and back space
-		if (userinput == "")		//return vector if input is empty string
+		if (userinput == "")
 			return x;
-		if (userinput.at(0) == '#')	//return vector if # is the first char
+		if (userinput.at(0) == '#')
 			return x;
-		pos_quote = userinput.find(delimiter_quotation);
-
-		if (userinput.find('"') != string::npos) // if userinput contain '"'
+		pos_quote = userinput.find('"');
+		if (pos_quote != string::npos) // if userinput contain '"'
 		{
 			pos_space = userinput.find(delimiter_space);
 			if (pos_space == string::npos || pos_quote < pos_space)	// no space found e.g "hello"
 																	// or quotation before space e.g " echo "
 				userinput = found_quotation(userinput, pos_quote, x);
+			pos_quote = userinput.find('"');
 		}
 
 		pos_space = userinput.find(delimiter_space);
@@ -44,8 +44,8 @@ vector<string> Base::parsing(string userinput)
 			userinput = userinput.erase(0, pos_space + 1);
 		}
 
-		int pos_and = word.find("&&");
-		int pos_or = word.find("||");
+		size_t pos_and = word.find("&&");
+		size_t pos_or = word.find("||");
 		if (pos_and != string::npos && pos_or != string::npos) // both && and || exist
 		{
 			if (pos_and < pos_or) // && before ||
@@ -88,13 +88,13 @@ string checkSpace(string userinput)
 			return userinput;
 		if (userinput.front() == ' ')
 			userinput.erase(0, 1);
-		if (userinput.back() == ' ')
-			userinput.erase(userinput.length() - 1, userinput.length());
+		//if (userinput.back() == ' ')
+		//	userinput.erase(userinput.length() - 1, userinput.length());
 		else
 			return userinput;
 	}
 }
-string found_connector(string word, int pos, vector<string>& x, string connector)	// ';' is found, this function is called
+string found_connector(string word, size_t pos, vector<string>& x, string connector)	// ';' is found, this function is called
 														// handle one ';' each time this is called
 {
 	if (pos == 0) // if first char is ';', push ';', return word after';'
@@ -121,14 +121,41 @@ string found_quotation(string userinput, size_t pos1, vector<string>& x) // pos1
 	// push first quotation
 	// push contents btw quotation
 	// push second quotation
-	if (pos2 != string::npos)
+	while (pos1 != string::npos)
 	{
-		//x.push_back("\"");temporarily removed these lines to see what the arguments looked like
-		x.push_back(userinput.substr(pos1 + 1, pos2 - pos1 - 1));
-		//x.push_back("\"");temporarily removed these lines to see what the arguments looked like
-		userinput = userinput.erase(pos1, pos2 - pos1 + 1);
-		userinput = checkSpace(userinput);
+		string temp;
+		if (pos2 != string::npos)		//if second quotation is found
+		{
+			size_t c1 = userinput.find("&&", pos2 + 1); //check if connector after first set of ""
+			size_t c2 = userinput.find("||", pos2 + 1);
+
+			//pos1 = userinput.find('"');
+			//pos2 = userinput.find('"', pos1 + 1);
+			if (c1 != string::npos) // e.g "hello" && random stuff
+			{
+				temp = userinput.substr(0, c1);
+				temp = temp.erase(pos2, 1);
+				temp = temp.erase(pos1, 1);
+				x.push_back(temp);
+				userinput = userinput.erase(0, c1 - 1);
+				return userinput;
+			}
+			else if (c2 != string::npos && c2 < pos1) // e.g "hello" || random stuff
+			{
+				temp = userinput.substr(0, c2);
+				temp = temp.erase(pos2, 1);
+				temp = temp.erase(pos1, 1);
+				x.push_back(temp);
+				userinput = userinput.erase(0, c2 - 1);
+				return userinput;
+			}
+			userinput = userinput.erase(pos2, 1);
+			userinput = userinput.erase(pos1, 1);
+			pos1 = userinput.find('"');
+			pos2 = userinput.find('"', pos1 + 1);
+		}
 	}
-	return userinput;
+	x.push_back(userinput);
+	return "";
 }
 #endif
