@@ -82,7 +82,8 @@ int main()
    }
   }
   else if (tokens.at(tokens.size()-1) == ";") {
- 	 //tokens.resize(tokens.size()-1);
+ 	 tokens.resize(tokens.size()-1);
+   /*
    cout << "> ";
    string userinput2;
  	 getline(cin,userinput2);
@@ -91,6 +92,7 @@ int main()
    for (int i = 0 ; i < tokens2.size(); ++i){
     tokens.push_back(tokens2.at(i));
     }
+    */
    }
 
  while(pos < tokens.size()){ //Keeps looking for commands untill all of tokens have been viewed
