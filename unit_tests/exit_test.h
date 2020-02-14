@@ -1,4 +1,5 @@
 //exit test h
+//good tests but exit actually quit the google test framework so taken out
 #ifndef _EXIT_TEST_H_
 #define _EXIT_TEST_H_
 using namespace std;
