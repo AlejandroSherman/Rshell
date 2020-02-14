@@ -18,6 +18,18 @@ TEST(BaseTestSet, base_normal_parse)
   }
 }
 
+TEST(BaseTestSet, base_end_spaces_parse)
+{
+  Base *input = new Command();
+  string userinput = "  echo hi how ya doing  ";
+  vector <string> tokens = (input->parsing(userinput));
+  ASSERT_EQ(tokens.size(), 5);
+  cout << "echo hi how ya doing" << endl;
+  for (int i = 0; i < tokens.size(); ++i){
+    cout << tokens.at(i) << " ";
+  }
+}
+
 TEST(BaseTestSet, base_comment_parse)
 {
   Base *input = new Command();
