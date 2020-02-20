@@ -3,7 +3,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #include <cstring>
 #include "../header/test.h"
 
