@@ -11,18 +11,18 @@
 
 using namespace std;
 
-bool Test::execute(){//currently designed to only successfully handle the first form of test flag or no flag and path
+bool Test::execute(){
   struct stat check;
   string path;
 
 
-  if(wds.size() == 1){//only "test" was entered
+  if(wds.size() == 1){//only "test" or "[]" was entered
   cout << "(False)" << endl;
   return false;
   }
 
 	if (wds.at(1) == "-e"){//found -e
-    if(wds.size() == 2){//only "test -e" was entered
+    if(wds.size() == 2){//only "test -e" or "[-e]" was entered
     cout << "(False)" << endl;
     return false;
     }
@@ -38,7 +38,7 @@ bool Test::execute(){//currently designed to only successfully handle the first 
   }
 
   else if (wds.at(1) == "-f"){//found -f
-    if(wds.size() == 2){//only "test -f" was entered
+    if(wds.size() == 2){//only "test -f" or "[-f]"was entered
     cout << "(False)" << endl;
     return false;
     }
@@ -60,7 +60,7 @@ bool Test::execute(){//currently designed to only successfully handle the first 
   }
 
   else if (wds.at(1) == "-d"){//found -d
-    if(wds.size() == 2){//only "test -d" was entered
+    if(wds.size() == 2){//only "test -d" or "[-d]"was entered
     cout << "(False)" << endl;
     return false;
     }

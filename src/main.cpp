@@ -195,5 +195,9 @@ if (command == "exit"){
 if (command == "test"){
 	return new Test(command,argument);
 }
+if (command == "["){
+  argument.resize(argument.size()-1);
+	return new Test(command,argument);  
+}
 return new Command(command,argument);
 }
