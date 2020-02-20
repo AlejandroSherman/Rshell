@@ -192,5 +192,8 @@ else{
 if (command == "exit"){
 	return new Exit(command);
 }
+if (command == "test"){
+	return new Test(command,argument);
+}
 return new Command(command,argument);
 }
