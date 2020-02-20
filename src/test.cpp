@@ -16,13 +16,13 @@ bool Test::execute(){
   string path;
 
 
-  if(wds.size() == 1){//only "test" or "[]" was entered
+  if(wds.size() == 1){//only "test" or "[ ]" was entered
   cout << "(False)" << endl;
   return false;
   }
 
 	if (wds.at(1) == "-e"){//found -e
-    if(wds.size() == 2){//only "test -e" or "[-e]" was entered
+    if(wds.size() == 2){//only "test -e" or "[ -e ]" was entered
     cout << "(False)" << endl;
     return false;
     }
@@ -38,7 +38,7 @@ bool Test::execute(){
   }
 
   else if (wds.at(1) == "-f"){//found -f
-    if(wds.size() == 2){//only "test -f" or "[-f]"was entered
+    if(wds.size() == 2){//only "test -f" or "[ -f ]"was entered
     cout << "(False)" << endl;
     return false;
     }
@@ -60,7 +60,7 @@ bool Test::execute(){
   }
 
   else if (wds.at(1) == "-d"){//found -d
-    if(wds.size() == 2){//only "test -d" or "[-d]"was entered
+    if(wds.size() == 2){//only "test -d" or "[ -d ]"was entered
     cout << "(False)" << endl;
     return false;
     }

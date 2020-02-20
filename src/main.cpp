@@ -196,8 +196,11 @@ if (command == "test"){
 	return new Test(command,argument);
 }
 if (command == "["){
+  if (argument.at(argument.size() - 1) != "]"){
+    cout << "-bash: [: missing `]'" << endl;
+  }
   argument.resize(argument.size()-1);
-	return new Test(command,argument);  
+	return new Test(command,argument);
 }
 return new Command(command,argument);
 }
