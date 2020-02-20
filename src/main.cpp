@@ -5,6 +5,7 @@
 #include "../header/command.h"
 #include "../header/connector.h"
 #include "../header/exit.h"
+#include "../header/test.h"
 #include<iostream>
 #include<string>
 using namespace std;
@@ -190,6 +191,13 @@ else{
 }
 if (command == "exit"){
 	return new Exit(command);
+}
+if (command == "test"){
+	return new Test(command,argument);
+}
+if (command == "["){
+  argument.resize(argument.size()-1);
+	return new Test(command,argument);  
 }
 return new Command(command,argument);
 }
