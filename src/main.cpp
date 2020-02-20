@@ -6,8 +6,10 @@
 #include "../header/connector.h"
 #include "../header/exit.h"
 #include "../header/test.h"
-#include<iostream>
-#include<string>
+#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#inlcude <vector>
 using namespace std;
 
 //function declarations
@@ -16,6 +18,8 @@ vector<string> set_argument(vector<string> &tokens, vector<string> commands, int
 Command* command_creator(vector<string> &tokens, int &pos);
 //Command creation function, gets command, flag, and arguments for one command and leaves blank spaces in the token vector ...
 //where these used to be.
+void reverseVec(vector<string> &tokens);
+vector<string> ShunYard(vector<string> tokens);
 
 int main()
 {
@@ -95,6 +99,16 @@ int main()
     }
     */
    }
+
+   //END OF RAW INPUT OF INPUT TOKENS AT THIS POINT BEGIN NEW ALGORITHM
+   reverseVec(tokens);
+   vector <string> prefix_tokens;
+   prefix_tokens = ShunYard(tokens);
+   reverse(prefix_tokens.begin(), prefix_tokens.end()); //no parenthesis should be present so just reverse and should have our prefix notation
+
+
+
+
 
  while(pos < tokens.size()){ //Keeps looking for commands untill all of tokens have been viewed
  command_objects.push_back(command_creator(tokens, pos)); //the command is placed into a vector of commands
@@ -203,4 +217,47 @@ if (command == "["){
 	return new Test(command,argument);
 }
 return new Command(command,argument);
+}
+
+void reverseVec(vector<string> &tokens){
+  reverse(tokens.begin(), tokens.end()); //revereses the contents of the vector
+  for (int i = 0; i < tokens.size(); ++i){//manually flips each parenthesis
+    if (tokens.at(i) == ")"){
+      tokens.at(i) = "(";
+    }
+    else if (tokens.at(i) == "("){
+      tokens.at(i) = ")";
+    }
+  }
+  return;
+}
+
+vector<string> ShunYard(vector<string> tokens){
+  vector <string> prefix_tokens;
+  stack <string> s;
+  for(int i = 0 ; i < tokens.size(); i++){
+    if ((tokens.at(i) == "&&") || (tokens.at(i) == "||") || (tokens.at(i) == ";")){//token is an operator
+      s.push(tokens.at(i));
+    }
+    else if(tokens.at(i) == "("){//token is a left paren
+      s.push(tokens.at(i));
+    }
+    else if(tokens.at(i) == ")"){//token is a right paren
+      while (s.top() != "("){
+        prefix_tokens.push_back(s.top());
+        s.pop();
+      }
+      if (s.top() == "("){
+        s.pop();
+      }
+    }
+    else{
+      prefix_tokens.push_back(tokens.at(i));
+    }
+  }
+  while (!s.empty()){
+    prefix_tokens.push_back(s.top());
+    s.pop();
+  }
+  return prefix_tokens;
 }
