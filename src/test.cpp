@@ -11,7 +11,7 @@
 
 using namespace std;
 
-bool test::execute(){//currently designed to only successfully handle the first form of test flag or no flag and path
+bool Test::execute(){//currently designed to only successfully handle the first form of test flag or no flag and path
   struct stat check;
   string path;
 
