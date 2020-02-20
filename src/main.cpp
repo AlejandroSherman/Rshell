@@ -5,6 +5,7 @@
 #include "../header/command.h"
 #include "../header/connector.h"
 #include "../header/exit.h"
+#include "../header/test.h"
 #include<iostream>
 #include<string>
 using namespace std;

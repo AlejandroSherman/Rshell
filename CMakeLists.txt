@@ -11,15 +11,17 @@ src/command.cpp
 src/and.cpp
 src/or.cpp
 src/semi.cpp
+src/test.cpp
 )
 
-ADD_EXECUTABLE(test 
+ADD_EXECUTABLE(test
 unit_tests/unit_test.cpp
 src/base.cpp
 src/command.cpp
 src/and.cpp
 src/or.cpp
 src/semi.cpp
+src/test.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
