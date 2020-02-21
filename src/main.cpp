@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 //function declarations
@@ -119,10 +120,22 @@ int main()
    */
 
    //END OF RAW INPUT OF INPUT TOKENS AT THIS POINT BEGIN NEW ALGORITHM
+   if(tokens_up.size() >= 2){
+   if((tokens_up.at(tokens_up.size()-1) != ")") && (tokens_up.at(tokens_up.size()-2) == "(")){//handles edge case of missmatched parenthesis
+    cout << "Error: Missmatched parenthesis - Try again" << endl;
+    continue;
+  }
+}
    reverseVec(tokens_up);
    vector <string> prefix_tokens;
+   try{//In case there are missmatched parenthesis
    prefix_tokens = ShunYard(tokens_up);
+   }
+   catch(...){//When there are missmatched parenthesis will simply prompt for more input
+     continue;
+   }
    //reverse(prefix_tokens.begin(), prefix_tokens.end()); //no parenthesis should be present so just reverse and should have our prefix notation
+   //this would change to pre fix but currently we keep it in postfix
 
    /*
    for(int i = 0 ; i < prefix_tokens.size(); ++i){
@@ -331,8 +344,9 @@ vector<string> ShunYard(vector<string> tokens){
         prefix_tokens.push_back(s.top());
         s.pop();
         if(s.empty()){
-          cout << "There are missmatched parenthesis!!" << endl;
-          //Segfaults after this... may need to throw an exeception and return early
+          cout << "Error: Missmatched parenthesis - Try again" << endl;
+          throw "This is an exception!";
+          return prefix_tokens;
         }
       }
       if (s.top() == "("){
@@ -345,8 +359,9 @@ vector<string> ShunYard(vector<string> tokens){
   }
   while (!s.empty()){
     if(s.top() == ")"){
-      cout << "There are missmatched parenthesis!!" << endl;
-      //Segfaults after this... may need to throw an exeception and return early
+      cout << "Error: Missmatched parenthesis - Try again" << endl;
+       throw "This is an exception!";
+       return prefix_tokens;
     }
     prefix_tokens.push_back(s.top());
     s.pop();

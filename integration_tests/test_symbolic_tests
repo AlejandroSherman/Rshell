@@ -1,0 +1,13 @@
+touch ex_file
+[ -e ex_file ] && echo Correct
+[ -d ex_file ] || echo Correct
+[ -f ex_file ] && echo Correct
+mkdir ex_dir
+[ -e ex_dir ] && echo Correct
+[ -d ex_dir ] && echo Correct
+[ -f ex_dir ] || echo Correct
+[ ex_file ] && echo Correct
+[ ex_dir ] && echo Correct
+rm ex_file
+rmdir ex_dir
+exit

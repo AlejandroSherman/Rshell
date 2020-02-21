@@ -1,0 +1,13 @@
+touch ex_file
+test -e ex_file && echo Correct
+test -d ex_file || echo Correct
+test -f ex_file && echo Correct
+mkdir ex_dir
+test -e ex_dir && echo Correct
+test -d ex_dir && echo Correct
+test -f ex_dir || echo Correct
+test ex_file && echo Correct
+test ex_dir && echo Correct
+rm ex_file
+rmdir ex_dir
+exit
