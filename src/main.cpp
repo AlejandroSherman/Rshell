@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 //function declarations
@@ -121,8 +122,14 @@ int main()
    //END OF RAW INPUT OF INPUT TOKENS AT THIS POINT BEGIN NEW ALGORITHM
    reverseVec(tokens_up);
    vector <string> prefix_tokens;
+   try{//In case there are missmatched parenthesis
    prefix_tokens = ShunYard(tokens_up);
+   }
+   catch(...){
+     continue;
+   }
    //reverse(prefix_tokens.begin(), prefix_tokens.end()); //no parenthesis should be present so just reverse and should have our prefix notation
+   //this would change to pre fix but currently we keep it in postfix
 
    /*
    for(int i = 0 ; i < prefix_tokens.size(); ++i){
@@ -332,7 +339,8 @@ vector<string> ShunYard(vector<string> tokens){
         s.pop();
         if(s.empty()){
           cout << "There are missmatched parenthesis!!" << endl;
-          //Segfaults after this... may need to throw an exeception and return early
+          throw "This is an exception!";
+          return prefix_tokens;
         }
       }
       if (s.top() == "("){
@@ -346,7 +354,8 @@ vector<string> ShunYard(vector<string> tokens){
   while (!s.empty()){
     if(s.top() == ")"){
       cout << "There are missmatched parenthesis!!" << endl;
-      //Segfaults after this... may need to throw an exeception and return early
+       throw "This is an exception!";
+       return prefix_tokens;
     }
     prefix_tokens.push_back(s.top());
     s.pop();
