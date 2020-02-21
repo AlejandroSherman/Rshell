@@ -6,16 +6,23 @@
 #include "../header/connector.h"
 #include "../header/exit.h"
 #include "../header/test.h"
-#include<iostream>
-#include<string>
+#include<sstream>
+#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
 //function declarations
 vector<string> set_argument(vector<string> &tokens, vector<string> commands, int &pos);
 //helper function
 Command* command_creator(vector<string> &tokens, int &pos);
+Command* command_creator_two(vector<string> &tokens, int &pos);
 //Command creation function, gets command, flag, and arguments for one command and leaves blank spaces in the token vector ...
 //where these used to be.
+void reverseVec(vector<string> &tokens);
+vector<string> ShunYard(vector<string> tokens);
+vector<string> update_tokens(vector<string> tokens);
 
 int main()
 {
@@ -95,7 +102,78 @@ int main()
     }
     */
    }
+   /*
+   for(int i = 0 ; i < tokens.size(); ++i){
+    cout << tokens.at(i) << " ";
+     }
+    cout << endl;
+   */
+   //Prime the tokens vector to have commands together
+   vector <string> tokens_up;
+   tokens_up = update_tokens(tokens);
+    /*
+   for(int i = 0 ; i < tokens_up.size(); ++i){
+    cout << tokens_up.at(i) << " ";
+     }
+    cout << endl;
+   */
 
+   //END OF RAW INPUT OF INPUT TOKENS AT THIS POINT BEGIN NEW ALGORITHM
+   reverseVec(tokens_up);
+   vector <string> prefix_tokens;
+   prefix_tokens = ShunYard(tokens_up);
+   //reverse(prefix_tokens.begin(), prefix_tokens.end()); //no parenthesis should be present so just reverse and should have our prefix notation
+
+   /*
+   for(int i = 0 ; i < prefix_tokens.size(); ++i){
+    cout << prefix_tokens.at(i) << " ";
+     }
+  */
+
+   if (prefix_tokens.size() == 1){// only one command entered
+     Base* single = command_creator_two(prefix_tokens, pos);
+     single->execute();
+     continue;
+   }
+
+   stack <Base*> tree;
+   Base* left;
+   Base* right;
+   //Connector* opp;
+
+   for(int i = 0 ; i < prefix_tokens.size(); ++i){
+     if (prefix_tokens.at(i) == "&&"){
+       left = tree.top();
+       tree.pop();
+       right = tree.top();
+       tree.pop();
+       //opp = new And(left, right);
+       tree.push(new And(left, right));
+     }
+     else if (prefix_tokens.at(i) == "||"){
+       left = tree.top();
+       tree.pop();
+       right = tree.top();
+       tree.pop();
+       tree.push(new Or(left, right));
+     }
+     else if (prefix_tokens.at(i) == ";"){
+       left = tree.top();
+       tree.pop();
+       right = tree.top();
+       tree.pop();
+       tree.push(new Semi(left, right));
+     }
+     else{
+       tree.push(command_creator_two(prefix_tokens,i));
+     }
+   }
+//only thing left in the stack is the top node
+Base* final = tree.top();
+   tree.pop();
+   final->execute();
+
+ /*
  while(pos < tokens.size()){ //Keeps looking for commands untill all of tokens have been viewed
  command_objects.push_back(command_creator(tokens, pos)); //the command is placed into a vector of commands
  if(pos != tokens.size()){
@@ -142,14 +220,7 @@ int main()
  }
    connector_objects.at(connector_objects.size()-1)->execute();
  }
- /*
- if(tokens.size() != 0){
- cout << endl << "The tokens vector at the end is: " << endl; //Show what is inside the tokens vector
- for (int i = 0; i < tokens.size(); ++i){
-	cout << tokens.at(i) << endl;
- }
-}*/
-
+  */
 }
 }
 	return 0;//should never be reached
@@ -203,4 +274,114 @@ if (command == "["){
 	return new Test(command,argument);
 }
 return new Command(command,argument);
+}
+
+Command* command_creator_two(vector<string> &tokens, int &pos){
+  string command;
+  string temp;
+
+  temp = tokens.at(pos);
+  stringstream ss(temp);
+  istream_iterator<string> begin(ss);
+  istream_iterator<string> end;
+  vector<string> argument(begin, end);
+  command = argument.at(0);
+
+  if (command == "exit"){
+  	return new Exit(command);
+  }
+  if (command == "test"){
+  	return new Test(command,argument);
+  }
+  if (command == "["){
+    if (argument.at(argument.size() - 1) != "]"){
+      cout << "-bash: [: missing `]'" << endl;
+    }
+    argument.resize(argument.size()-1);
+  	return new Test(command,argument);
+  }
+  return new Command(command,argument);
+}
+
+void reverseVec(vector<string> &tokens){
+  reverse(tokens.begin(), tokens.end()); //revereses the contents of the vector
+  for (int i = 0; i < tokens.size(); ++i){//manually flips each parenthesis
+    if (tokens.at(i) == ")"){
+      tokens.at(i) = "(";
+    }
+    else if (tokens.at(i) == "("){
+      tokens.at(i) = ")";
+    }
+  }
+  return;
+}
+
+vector<string> ShunYard(vector<string> tokens){
+  vector <string> prefix_tokens;
+  stack <string> s;
+  for(int i = 0 ; i < tokens.size(); i++){
+    if ((tokens.at(i) == "&&") || (tokens.at(i) == "||") || (tokens.at(i) == ";")){//token is an operator
+      s.push(tokens.at(i));
+    }
+    else if(tokens.at(i) == "("){//token is a left paren
+      s.push(tokens.at(i));
+    }
+    else if(tokens.at(i) == ")"){//token is a right paren
+      while (s.top() != "("){
+        prefix_tokens.push_back(s.top());
+        s.pop();
+        if(s.empty()){
+          cout << "There are missmatched parenthesis!!" << endl;
+          //Segfaults after this... may need to throw an exeception and return early
+        }
+      }
+      if (s.top() == "("){
+        s.pop();
+      }
+    }
+    else{
+      prefix_tokens.push_back(tokens.at(i));
+    }
+  }
+  while (!s.empty()){
+    if(s.top() == ")"){
+      cout << "There are missmatched parenthesis!!" << endl;
+      //Segfaults after this... may need to throw an exeception and return early
+    }
+    prefix_tokens.push_back(s.top());
+    s.pop();
+  }
+  return prefix_tokens;
+}
+
+vector<string> update_tokens(vector<string> tokens){
+  vector <string> tokens_up;
+  int pos = 0;
+  string temp;
+  while(pos < tokens.size()){
+    if ((tokens.at(pos) == "||") || (tokens.at(pos) == "&&") || (tokens.at(pos) == ";") || (tokens.at(pos) == "(") || (tokens.at(pos) == ")")){
+      tokens_up.push_back(tokens.at(pos));
+      pos++;
+    }
+    else {
+      temp = tokens.at(pos);
+      pos++;
+      if (pos == tokens.size()){
+        tokens_up.push_back(temp);
+        break;
+      }
+      //while (pos < tokens.size()){
+      while ((tokens.at(pos) != "||") && (tokens.at(pos) != "&&") && (tokens.at(pos) != ";") && (tokens.at(pos) != "(") && (tokens.at(pos) != ")")){
+        temp = temp + " " + tokens.at(pos);
+        pos++;
+        //continue;
+        if (pos == tokens.size()){
+          break;
+        }
+      }
+     //}
+      tokens_up.push_back(temp);
+    }
+}
+  return tokens_up;
 }
