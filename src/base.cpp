@@ -6,7 +6,25 @@
 string checkSpace(string);
 string found_connector(string, size_t, vector<string>&, string);
 string found_quotation(string, size_t, vector<string>&);
-
+string found_paren(string);
+string found_paren(string userinput, char deli, string str)
+{
+	size_t paren = userinput.find(deli);
+	if (paren != string::npos)
+	{
+		string temp = userinput;
+		userinput = "";
+		while (paren != string::npos)
+		{
+			userinput.append(temp.substr(0, paren));
+			userinput.append(str);
+			temp = temp.erase(0, paren + 1);
+			paren = temp.find(deli);
+		}
+		userinput.append(temp);
+	}
+	return userinput;
+}
 vector<string> Base::parsing(string userinput)
 {
 	size_t pos_space, pos_quote;
@@ -16,12 +34,14 @@ vector<string> Base::parsing(string userinput)
 	char delimiter_space = ' ';
 	char delimiter_quotation = '"';
 	string connector;
+	if (userinput.find('(') != string::npos)
+		userinput = found_paren(userinput, '(', " ( ");
+	if (userinput.find(')') != string::npos)
+		userinput = found_paren(userinput, ')', " ) ");
 	while (true)
 	{
 		userinput = checkSpace(userinput); //get rid of front and back space
-		if (userinput == "")
-			return x;
-		if (userinput.at(0) == '#')
+		if (userinput == "" || userinput.at(0) == '#')
 			return x;
 		pos_quote = userinput.find('"');
 		if (pos_quote != string::npos) // if userinput contain '"'
