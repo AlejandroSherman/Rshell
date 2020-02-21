@@ -330,6 +330,9 @@ vector<string> ShunYard(vector<string> tokens){
       while (s.top() != "("){
         prefix_tokens.push_back(s.top());
         s.pop();
+        if(s.empty()){
+          cout << "There are missmatched parenthesis!!" << endl;
+        }
       }
       if (s.top() == "("){
         s.pop();
@@ -340,6 +343,9 @@ vector<string> ShunYard(vector<string> tokens){
     }
   }
   while (!s.empty()){
+    if(s.top() == ")"){
+      cout << "There are missmatched parenthesis!!" << endl;
+    }
     prefix_tokens.push_back(s.top());
     s.pop();
   }
