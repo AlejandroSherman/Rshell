@@ -13,16 +13,20 @@
 using namespace std;
 
 bool Command::execute() {
-   //vector<string> x;
-    //cout << "command object here!" << endl << "My command is: " << cmd << " My arguments are: ";
-    //for(int i = 0; i < args.size(); ++i){
-    //    cout << args.at(i)<< " ";
-    //}
-    //cout << "The size of argument vector: " << args.size() << endl;
-    //cout << "Start executing ";
-    //cout << endl;
+  /*
+   vector<string> x;
+    cout << "command object here!" << endl << "My command is: " << cmd << " My arguments are: ";
+    for(int i = 0; i < args.size(); ++i){
+        cout << args.at(i)<< " ";
+    }
+    cout << "The size of argument vector: " << args.size() << endl;
+    cout << "Start executing ";
+    cout << endl;
+    return true;
 
-    const char* cmd_exe = cmd.c_str(); 
+  */
+
+    const char* cmd_exe = cmd.c_str();
     bool result = true;
     char* arg[500];
     int i = 0;
@@ -33,7 +37,7 @@ bool Command::execute() {
         i++;
     }
     arg[i] = NULL;
-    
+
     if (pid < 0) //error on forking
         perror("fork() error");
 
@@ -53,12 +57,13 @@ bool Command::execute() {
         int exit_status = WEXITSTATUS(status);
         if (exit_status != 0)           //if normal, should return 0
         {
-            if (!(exit_status == 1 || exit_status == 2)) 
+            if (!(exit_status == 1 || exit_status == 2))
                 printf("Child failed, exit status of the child was %d\n", exit_status);
             result = false;
         }
     }
-    return result; 
+    return result;
+    
 }
 
 #endif
