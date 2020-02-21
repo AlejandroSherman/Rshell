@@ -120,10 +120,12 @@ int main()
    */
 
    //END OF RAW INPUT OF INPUT TOKENS AT THIS POINT BEGIN NEW ALGORITHM
+   if(tokens_up.size() >= 2){
    if((tokens_up.at(tokens_up.size()-1) != ")") && (tokens_up.at(tokens_up.size()-2) == "(")){//handles edge case of missmatched parenthesis
     cout << "Error: Missmatched parenthesis - Try again" << endl;
     continue;
   }
+}
    reverseVec(tokens_up);
    vector <string> prefix_tokens;
    try{//In case there are missmatched parenthesis
