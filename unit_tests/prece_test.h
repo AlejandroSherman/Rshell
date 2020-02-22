@@ -29,7 +29,7 @@ TEST(PreceTestSet, oneOperator){
     cout << postfix_tokens.at(i) << " ";
   }
   string result;
-  result = "echo B echo A &&"
+  result = "echo B echo A &&";
   cout << result;
 }
 
