@@ -25,8 +25,8 @@ TEST(PreceTestSet, oneOperator){
   vector <string> postfix_tokens;
   postfix_tokens = ShunYard(tokens);
   ASSERT_EQ(tokens.size(), 3);
-  for(int i = 0; i < prefix_tokens.size(); ++i){
-    cout << prefix_tokens.at(i) << " ";
+  for(int i = 0; i < postfix_tokens.size(); ++i){
+    cout << postfix_tokens.at(i) << " ";
   }
   string result;
   result = "echo B echo A &&"
