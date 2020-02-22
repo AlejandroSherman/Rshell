@@ -5,7 +5,7 @@
 Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit`, as well as the use of three connectors that allow users to execute multiple commands at once. These connectors are "||" (or), "&&" (and), and ";" (semi). The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions.
 
 ## Diagram
-![OMT_Diagram](https://github.com/cs100/assignment-empty_string/blob/master/images/OMT_Diagram.png?raw=true)
+![OMT_Diagram]()
 
 ## Classes
 ### main.cpp
@@ -13,8 +13,10 @@ The area that the user interacts with when they use the shell
 
 * `#includes` all the other classes from the header folder
 * displays the command prompt `guest@rshell:~$`
-* takes the user input and executes it according to the general Linux shell functionality
 * user's input is echoed as they type it
+* utilizes Shunting Yard algorithm to handle parenthesis and precedence
+* executes commands similar to how a calculator does
+* using the postfix expression from the SY algorithm, an expression tree is created and the root node is executed
 
 ### base.h
 A class that other frameworks build off of, an abstract base class
@@ -57,6 +59,16 @@ A self designed rshell command to exit the rshell
 * `execute()` : a self designed function that exits the rshell, done by calling exit(0);
 * inherits command defined features
 * the rshell will keep running until this command is entered
+
+### test.h
+A self designed rshell command to test the existence and types of objects located on the local or absolute path
+
+* a test object is created in the main when a command is created that has "test" as the passed in command or when an input is surrounded by `[ ]`
+* these two types are known as "literal" and "symbolic" respectively
+* `execute()` : a self designed function that tests the status an object on the specified path according to the flags -e -f or -d with -e being assumed if no flag specified
+* performs the execution using `stat()` function and `S_ISDIR()`, `S_ISREG()` macros
+* returns true if passes and outputs `(TRUE)` and is false and outputs `(FALSE)` if fails
+
 
 ### and.cpp
 A class that implements the rshell "&&" connector
@@ -109,3 +121,7 @@ A class that implements the rshell ";" connector
 [#8](../../issues/8) Implement and test: Semi
 
 [#9](../../issues/9) Implement and test: Main(user interface)
+
+[#10](../../issues/33) Implement and test: Test
+
+[#11](../../issues/34) Implement and test: Precedence(SY in main)
