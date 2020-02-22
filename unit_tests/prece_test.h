@@ -106,12 +106,12 @@ TEST(PreceTestSet, MissingParenLong){
   try{
   postfix_tokens = ShunYard(tokens);
   }
-  ASSERT_EQ(postfix_tokens.size(), 0);
   catch(...){
      cout << "I failed gracefully" << endl;
    }
+  ASSERT_EQ(postfix_tokens.size(), 0);
   string result;
-  result = "Error: Missmatched parenthesis - Try again" << endl;
+  result = "Error: Missmatched parenthesis - Try again";
   cout << result << endl << "I failed gracefully" << endl;
 }
 
@@ -138,7 +138,7 @@ TEST(PreceTestSet, MissingParenShort){
    }
    */
   string result;
-  result = "Error: Missmatched parenthesis - Try again" << endl;
+  result = "Error: Missmatched parenthesis - Try again";
   cout << result << endl;
 }
 
