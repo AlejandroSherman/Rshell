@@ -13,6 +13,8 @@
 //#include "exit_test.h"
 #include "or_test.h"
 #include "semi_test.h"
+//#include "test_test.h"
+#include "prece_test.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
