@@ -30,7 +30,7 @@ TEST(PreceTestSet, oneOperator){
   }
   string result;
   result = "echo B echo A &&";
-  cout << endl << result;
+  cout << endl << result << endl;
 }
 
 TEST(PreceTestSet, TwoOperators){
@@ -54,7 +54,7 @@ TEST(PreceTestSet, TwoOperators){
   }
   string result;
   result = "echo C echo B echo A && ;";
-  cout << endl << result;
+  cout << endl << result << endl;
 }
 
 TEST(PreceTestSet, ThreeOperators){
@@ -80,7 +80,7 @@ TEST(PreceTestSet, ThreeOperators){
   }
   string result;
   result = "echo D echo C && echo B echo A && ||";
-  cout << endl << result;
+  cout << endl << result << endl;
 }
 
 TEST(PreceTestSet, MissingParenLong){
