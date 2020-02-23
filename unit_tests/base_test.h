@@ -97,4 +97,124 @@ TEST(BaseTestSet, base_quotes_parse)
     cout << tokens.at(i) << " ";
   }
 }
+
+TEST(BaseTestSet, base_Paren1_parse)
+{
+    Base* input = new Command();
+    string userinput = "echo a && (echo b || echo c)";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 10);
+    cout << "echo a && ( echo b || echo c )" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_Paren2_parse)
+{
+    Base* input = new Command();
+    string userinput = "echo a && (echo b || (echo c && echo d))";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 15);
+    cout << "echo a && ( echo b || ( echo c && echo d ) )" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_Paren3_parse)
+{
+    Base* input = new Command();
+    string userinput = "()()echo (a) && (echo b (||) (echo c && echo d))";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 23);
+    cout << "( ) ( ) echo ( a ) && ( echo b ( || ) ( echo c && echo d ) )" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_Paren4_parse)
+{
+    Base* input = new Command();
+    string userinput = "((ls -a)";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 5);
+    cout << "( ( ls -a )" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_Paren5_parse)
+{
+    Base* input = new Command();
+    string userinput = "((ls -a)&&(echo bye))";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 11);
+    cout << "( ( ls -a ) && ( echo bye ) )" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_SqBracket1_parse)
+{
+    Base* input = new Command();
+    string userinput = "[ -e test/file/path ]";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 4);
+    cout << "[ -e test/file/path ]" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_SqBracket2_parse)
+{
+    Base* input = new Command();
+    string userinput = "[-e test/file/path]";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 2);
+    cout << "[-e test/file/path]" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_SqBracket3_parse)
+{
+    Base* input = new Command();
+    string userinput = "[ -e test/file/path ] && [ -d test/file/valid ]";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 9);
+    cout << "[ -e test/file/path ] && [ -d test/file/valid ]" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_SqBracket4_parse)
+{
+    Base* input = new Command();
+    string userinput = " [ -e test/file/path ] || (test -e path || [ -f localpath ])";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 15);
+    cout << "[ -e test/file/path ] || ( test -e path || [ -f localpath ] )" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
+
+TEST(BaseTestSet, base_SqBracket5_parse)
+{
+    Base* input = new Command();
+    string userinput = " [ ]";
+    vector <string> tokens = (input->parsing(userinput));
+    ASSERT_EQ(tokens.size(), 2);
+    cout << "[ ]" << endl;
+    for (int i = 0; i < tokens.size(); ++i) {
+        cout << tokens.at(i) << " ";
+    }
+}
 #endif // !_BASE_TEST_H_
