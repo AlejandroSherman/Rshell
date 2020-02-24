@@ -26,6 +26,14 @@ bool Test::execute(){
     cout << "(False)" << endl;
     return false;
     }
+    if((wds.at(wds.size() -1) != "]") && (wds.size() >= 4)){//Puts an error msg if multiple words put as a test commands arguments
+    if(wds.at(0) == "test"){
+    cout << "-bash: test: " << wds.at(2) << ": unary operator expected"<< endl;
+    }
+    if(wds.at(0) == "["){
+    cout << "-bash: [: " << wds.at(2) << ": unary operator expected"<< endl;
+    }
+    }
     path = wds.at(2);
     if (stat(path.c_str(), &check) == 0){//if stat passes it returns 0
       cout << "(True)" << endl;
@@ -41,6 +49,14 @@ bool Test::execute(){
     if(wds.size() == 2){//only "test -f" or "[ -f ]"was entered
     cout << "(False)" << endl;
     return false;
+    }
+    if((wds.at(wds.size() -1) != "]") && (wds.size() >= 4)){//Puts an error msg if multiple words put as a test commands arguments
+    if(wds.at(0) == "test"){
+    cout << "-bash: test: " << wds.at(2) << ": unary operator expected"<< endl;
+    }
+    if(wds.at(0) == "["){
+    cout << "-bash: [: " << wds.at(2) << ": unary operator expected"<< endl;
+    }
     }
     path = wds.at(2);
     if (stat(path.c_str(), &check) == 0){//still check if the basic -e check passes first
@@ -64,6 +80,14 @@ bool Test::execute(){
     cout << "(False)" << endl;
     return false;
     }
+    if((wds.at(wds.size() -1) != "]") && (wds.size() >= 4)){//Puts an error msg if multiple words put as a test commands arguments
+    if(wds.at(0) == "test"){
+    cout << "-bash: test: " << wds.at(2) << ": unary operator expected"<< endl;
+    }
+    if(wds.at(0) == "["){
+    cout << "-bash: [: " << wds.at(2) << ": unary operator expected"<< endl;
+    }
+    }
     path = wds.at(2);
     if (stat(path.c_str(), &check) == 0){//still check if the basic -e check passes first
       if(S_ISDIR(check.st_mode)){//returns 1 if passed
@@ -83,6 +107,14 @@ bool Test::execute(){
 
   else {//no flag specified, treat as -e
     path = wds.at(1);
+    if((wds.at(wds.size() -1) != "]") && (wds.size() >= 3)){//Puts an error msg if multiple words put as a test commands arguments
+    if(wds.at(0) == "test"){
+    cout << "-bash: test: " << wds.at(1) << ": unary operator expected"<< endl;
+    }
+    if(wds.at(0) == "["){
+    cout << "-bash: [: " << wds.at(1) << ": unary operator expected"<< endl;
+    }
+    }
     if (stat(path.c_str(), &check) == 0){//if stat passes it returns 0
       cout << "(True)" << endl;
       return true;
