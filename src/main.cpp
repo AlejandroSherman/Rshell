@@ -6,12 +6,14 @@
 #include "../header/connector.h"
 #include "../header/exit.h"
 #include "../header/test.h"
+#include "../header/input.h"
 #include<sstream>
 #include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <fcntl.h>
 using namespace std;
 
 //function declarations
@@ -52,8 +54,12 @@ int main()
    cout << "-bash: syntax error near unexpected token `;'" << endl;
    continue;
   }
+  else if ((tokens.at(tokens.size()-1) == "<")  && (tokens.size()==1)){
+   cout << "-bash: syntax error near unexpected token `newline'" << endl;
+   continue;
+  }
 
-  //if last thing entered is an operator promt with > for another command, if it's ";" then ignore it
+  //if last thing entered is an operator promt with > for another command, if it's ";" then ignore it, if it's "<" then treat as an error
   if(tokens.at(tokens.size()-1) == "&&"){
    cout << "> ";
    string userinput2;
@@ -73,6 +79,10 @@ int main()
    for (int i = 0 ; i < tokens2.size(); ++i){
     tokens.push_back(tokens2.at(i));
    }
+ }
+   else if (tokens.at(tokens.size()-1) == "<"){
+     cout << "-bash: syntax error near unexpected token `newline'" << endl;
+     continue;
   }
   else if (tokens.at(tokens.size()-1) == ";") {
  	 tokens.resize(tokens.size()-1);
@@ -111,7 +121,7 @@ int main()
    Base* left;
    Base* right;
 
-   for(int i = 0 ; i < postfix_tokens.size(); ++i){
+   for(int i = 0 ; i < postfix_tokens.size(); ++i){//Curently no priority in operators and work left to right unless there are parenthesis
      if (postfix_tokens.at(i) == "&&"){
        left = tree.top();
        tree.pop();
@@ -132,6 +142,13 @@ int main()
        right = tree.top();
        tree.pop();
        tree.push(new Semi(left, right));
+     }
+     else if (postfix_tokens.at(i) == "<"){
+       left = tree.top();
+       tree.pop();
+       right = tree.top();
+       tree.pop();
+       tree.push(new Input(left, right));
      }
      else{
        tree.push(command_creator(postfix_tokens,i));
@@ -196,7 +213,7 @@ vector<string> ShunYard(vector<string> tokens){
   vector <string> postfix_tokens;
   stack <string> s;
   for(int i = 0 ; i < tokens.size(); i++){
-    if ((tokens.at(i) == "&&") || (tokens.at(i) == "||") || (tokens.at(i) == ";")){//token is an operator
+    if ((tokens.at(i) == "&&") || (tokens.at(i) == "||") || (tokens.at(i) == ";") || (tokens.at(i) == "<")){//token is an operator
       s.push(tokens.at(i));
     }
     else if(tokens.at(i) == "("){//token is a left paren
@@ -237,7 +254,7 @@ vector<string> update_tokens(vector<string> tokens){
   int pos = 0;
   string temp;
   while(pos < tokens.size()){
-    if ((tokens.at(pos) == "||") || (tokens.at(pos) == "&&") || (tokens.at(pos) == ";") || (tokens.at(pos) == "(") || (tokens.at(pos) == ")")){
+    if ((tokens.at(pos) == "||") || (tokens.at(pos) == "&&") || (tokens.at(pos) == ";") || (tokens.at(pos) == "<") || (tokens.at(pos) == "(") || (tokens.at(pos) == ")")){
       tokens_up.push_back(tokens.at(pos));
       pos++;
     }
@@ -249,7 +266,7 @@ vector<string> update_tokens(vector<string> tokens){
         break;
       }
       //while (pos < tokens.size()){
-      while ((tokens.at(pos) != "||") && (tokens.at(pos) != "&&") && (tokens.at(pos) != ";") && (tokens.at(pos) != "(") && (tokens.at(pos) != ")")){
+      while ((tokens.at(pos) != "||") && (tokens.at(pos) != "&&") && (tokens.at(pos) != ";") && (tokens.at(pos) != "<") && (tokens.at(pos) != "(") && (tokens.at(pos) != ")")){
         temp = temp + " " + tokens.at(pos);
         pos++;
         //continue;
