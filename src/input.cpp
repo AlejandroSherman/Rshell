@@ -19,13 +19,14 @@ class Base;
 class Connector;
 
 bool Input::execute() {
-  string filepath = "hello.txt"; //Hard coded for testing purposes, will be removed
-  cout << "Reading file: hello.txt" << endl; //Will also be removed
+  string filepath = "dude.txt"; //Hard coded for testing purposes, will be removed
+  cout << "Reading file: " << filepath << endl; //Will also be removed
 
   int file_fd = open(filepath.c_str(), O_RDONLY);
   if (file_fd < 0) {//Check if failed
-  perror("Failed at open");
-  exit(1);
+  string err_msg = "-bash: " + filepath;
+  perror(err_msg.c_str()); //more accurate error msg
+  //perror("Failed at open");
   return false;
   }
 
@@ -33,8 +34,8 @@ bool Input::execute() {
   int stdinsave = dup(0); //Save stdin
   int check = dup2(file_fd, 0);
   if (check < 0) {//Check if failed
-  perror("Failed at dup2");
-  exit(1);
+  perror("Failed at dup2"); //doesn't usually fail so never really see this msg
+  exit(1); //Force out of the file
   return false;
   }
 
@@ -47,10 +48,10 @@ bool Input::execute() {
   int final_check = close(file_fd);
   if (final_check == -1) {//-1 is returned on failure
   perror("errno"); //special error msg close uses
-  exit(1);
+  exit(1); //Force out of the file
   return false;
   }
-  else if (final_check == 0) {//0 is returned on success
+  else if (final_check == 0) {//0 is returned on success, closed correctly
   return true;
   }
   return true; //Shouldn't be reached
