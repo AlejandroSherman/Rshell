@@ -246,6 +246,10 @@ vector<string> ShunYard(vector<string> tokens){
   stack <string> s;
   for(int i = 0 ; i < tokens.size(); i++){
     if ((tokens.at(i) == "&&") || (tokens.at(i) == "||") || (tokens.at(i) == ";") || (tokens.at(i) == "<") || (tokens.at(i) == ">") || (tokens.at(i) == ">>")){//token is an operator
+      // while((!s.empty()) && (s.top() != ")") && (s.top() != "(") && (tokens.at(i) == "|")){//Code to have  pipe have less precedence then everything else
+      //   postfix_tokens.push_back(s.top());
+      //   s.pop();
+      // }
       s.push(tokens.at(i));
     }
     else if(tokens.at(i) == "("){//token is a left paren
