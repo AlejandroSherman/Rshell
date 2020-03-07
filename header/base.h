@@ -12,6 +12,7 @@ class Base {
 	vector<string> parsing(string);
         /* Virtual Functions */
         virtual bool execute() = 0;
+        virtual string getPath() = 0; 
 };
 
 #endif

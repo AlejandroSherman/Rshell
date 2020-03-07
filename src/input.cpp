@@ -19,10 +19,10 @@ class Base;
 class Connector;
 
 bool Input::execute() {
-  string filepath = "dude.txt"; //Hard coded for testing purposes, will be removed
-  cout << "Reading file: " << filepath << endl; //Will also be removed
+  string filepath = right->getPath();
+  //cout << "Reading file: " << filepath << endl; //for testing
 
-  int file_fd = open(filepath.c_str(), O_RDONLY);
+  int file_fd = open(filepath.c_str(), O_RDONLY); //Flag = read only, default permissions
   if (file_fd < 0) {//Check if failed
   string err_msg = "-bash: " + filepath;
   perror(err_msg.c_str()); //more accurate error msg

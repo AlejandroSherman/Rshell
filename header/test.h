@@ -18,5 +18,8 @@ public:
     wds = arguments;
 	};
 	bool execute();
+  string getPath(){
+    return wd;
+	}
 };
 #endif
