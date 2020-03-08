@@ -19,5 +19,8 @@ public:
 		//else
 			//return true;
 	}
+	string getPath(){
+		return "exit";
+	}
 };
 #endif

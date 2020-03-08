@@ -19,7 +19,9 @@ public:
     args = arguments;
 }
   virtual bool execute ();
-
+  virtual string getPath(){
+    return cmd;
+  }
 };
 
 

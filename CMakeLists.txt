@@ -12,6 +12,9 @@ src/and.cpp
 src/or.cpp
 src/semi.cpp
 src/test.cpp
+src/input.cpp
+src/output_t.cpp
+src/output_a.cpp
 )
 
 ADD_EXECUTABLE(test
@@ -22,6 +25,9 @@ src/and.cpp
 src/or.cpp
 src/semi.cpp
 src/test.cpp
+src/input.cpp
+src/output_t.cpp
+src/output_a.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)

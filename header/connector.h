@@ -19,6 +19,7 @@ public:
   right = rhs;
   }
   virtual bool execute() = 0;
+  virtual string getPath() = 0;
 };
 
 #endif
