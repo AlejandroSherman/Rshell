@@ -2,8 +2,7 @@
 > Winter 2020 - Alejandro Sherman (862062898) and Ernie Hung (862153636)
 
 ## Introduction
-Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit`, as well as the use of three connectors that allow users to execute multiple commands at once. These connectors are "||" (or), "&&" (and), and ";" (semi). The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions.
-
+Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit` and `test` (both self designed), as well as the use of three connectors that allow users to execute multiple commands at once, and four more connectors that allow for input and output redirection. These connectors are "||" (or), "&&" (and), ";" (semi), "|" (pipe), "<" (input), ">" (output_t), and ">>" (output_a). All commands, save for the self designed ones as mentioned above, are executed in a fork are passed to the linux system via `execvp()`. The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions. 
 ## Diagram
 ![OMT_Diagram](https://github.com/cs100/assignment-empty_string/blob/master/images/OMT_Diagram.png?raw=true)
 
