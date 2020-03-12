@@ -9,7 +9,7 @@ TEST(PipesTestSet, pipe1)
 	vector <string> vec1, vec2; 
 	vec1.push_back("cat");
 	vec1.push_back("input.txt");
-	vec2.push_back("rt");
+	vec2.push_back("tr");
 	vec2.push_back("a-z");
 	vec2.push_back("A-Z");
 	Command* cmd1 = new Command(vec1.at(0), vec1);
