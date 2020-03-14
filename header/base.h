@@ -4,6 +4,7 @@
 using namespace std;
 #include <string>
 #include <vector>
+#include <iostream>
 class Base {
     public:
         /* Constructor */
@@ -13,6 +14,8 @@ class Base {
         /* Virtual Functions */
         virtual bool execute() = 0;
         virtual string getPath() = 0; 
+        virtual void print() {};
+        virtual vector<string> getVector() {};
 };
 
 #endif

@@ -13,8 +13,8 @@
 using namespace std;
 
 bool Command::execute() {
-  /*
-   vector<string> x;
+  
+   /*vector<string> x;
     cout << "command object here!" << endl << "My command is: " << cmd << " My arguments are: ";
     for(int i = 0; i < args.size(); ++i){
         cout << args.at(i)<< " ";
@@ -22,9 +22,8 @@ bool Command::execute() {
     cout << "The size of argument vector: " << args.size() << endl;
     cout << "Start executing ";
     cout << endl;
-    return true;
-
-  */
+    */
+  
 
     const char* cmd_exe = cmd.c_str();
     bool result = true;
