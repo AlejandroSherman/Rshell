@@ -1,0 +1,9 @@
+cat ../names.txt > names2.txt || echo failed
+echo family > family.txt || echo failed
+git status >> status.txt || echo failed
+ls >> ls.txt || echo failed
+echo REMOVED > family.txt || echo failed
+echo I worked! >> ls.txt  || echo failed
+echo names2.txt && cat names2.txt && echo family.txt && cat family.txt && echo status.txt && cat status.txt && echo ls.txt && cat ls.txt
+rm names2.txt && rm family.txt && rm status.txt && rm ls.txt
+exit
