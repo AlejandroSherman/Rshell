@@ -46,7 +46,6 @@ void pipeExe(Base* cmd) {
 	}
 }
 bool Pipes::execute() {
-	cout << "Pipe is called!" << endl; 
 	const int READ = 0, WRITE = 1; 
 	int pipefd[2], stdfd_in, stdfd_out, check; 
 	pid_t cpid1, cpid2; 
@@ -55,10 +54,8 @@ bool Pipes::execute() {
 	forkcheck(cpid1);
 	if (cpid1 == 0) //child 1
 	{
-		cout << "This is child 1" << endl; 
 		close(pipefd[READ]);
 		stdfd_out = dup(1);
-		cout << "stdfdout is " << stdfd_out << endl;
 
 		check = dup2(pipefd[WRITE], WRITE);
 		dup2check(check);
@@ -67,7 +64,6 @@ bool Pipes::execute() {
 		check = dup2(stdfd_out, WRITE);
 		dup2check(check);
 
-		cout << "This is end of child 1" << endl;
 
 	}
 	else
@@ -76,18 +72,14 @@ bool Pipes::execute() {
 		forkcheck(cpid2);
 		if (cpid2 == 0)			//child 2
 		{
-			cout << "This is child 2" << endl;
 			close(pipefd[WRITE]);
 			stdfd_in = dup(0);
-			cout << "stdfdin is " << stdfd_in << endl; 
 			check = dup2(pipefd[READ], READ);
 			dup2check(check);
 
 			pipeExe(right);
 			check = dup2(stdfd_in, READ);
-			cout << "Check is " << check << endl; 
 			dup2check(check);
-			cout << "This is end of child 2" << endl; 
 		}
 	}
 
