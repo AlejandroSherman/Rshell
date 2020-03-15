@@ -2,7 +2,7 @@
 > Winter 2020 - Alejandro Sherman (862062898) and Ernie Hung (862153636)
 
 ## Introduction
-Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit` and `test` (both self designed), as well as the use of three connectors that allow users to execute multiple commands at once, and four more connectors that allow for input and output redirection. These connectors are "||" (or), "&&" (and), ";" (semi), "|" (pipe), "<" (input), ">" (output_t), and ">>" (output_a). All commands, save for the self designed ones as mentioned above, are executed in a fork are passed to the linux system via `execvp()`. The system runs commands and operators from left to right, unless parenthesis are entered, in which case, commands and operators will be executed in the proper precedence. The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions. 
+Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit` and `test` (both self designed), as well as the use of three connectors that allow users to execute multiple commands at once, and four more connectors that allow for input and output redirection. These connectors are "||" (or), "&&" (and), ";" (semi), "|" (pipe), "<" (input), ">" (output_t), and ">>" (output_a). All commands, save for the self designed ones as mentioned above, are executed in a fork are passed to the linux system via `execvp()`. The system runs commands and operators from left to right, unless parenthesis are entered, in which case, commands and operators will be executed in the proper precedence. The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions.
 ## Diagram
 ![OMT_Diagram](https://github.com/cs100/assignment-empty_string/blob/master/images/OMT_Diagram.png?raw=true)
 
@@ -101,10 +101,10 @@ A class that implements the rshell ";" connector
 * `getPath()` : obligatory `getPath()` implementation, if called on a connector such as this, returns `left->getPath()` + " ; " + `right->getPath()`, this will result in a failure that the system can adequately handle
 * commands are executed by utilizing the command class execute
 
-### pipe.cpp
+### pipes.cpp
 A class that implements the rshell "|" connector
 
-* `Pipe() : Connector` + `Pipe(Base*, Base*) : Connector()` : Pipe constructors
+* `Pipes() : Connector` + `Pipes(Base*, Base*) : Connector()` : Pipes constructors
 * utilizes the left and right base pointers from the connector class
 * `execute()` : using the functions of `dup()`, `dup2()`, and `pipe()`, this function reads output from a program on the left side of the pipe, and writes the previous output as an input to a program on the right side of the pipe
 * `getPath()` : obligatory `getPath()` implementation, if called on a connector such as this, returns `left->getPath()` + " | " + `right->getPath()`, this will result in a failure that the system can adequately handle
@@ -181,3 +181,5 @@ A class that implements the rshell ">>" connector
 [#13](../../issues/39) Implement and test: Input Redirection
 
 [#14](../../issues/41) Implement and test: Output Redirection
+
+[#15](../../issues/46) Implement and test: Pipes
