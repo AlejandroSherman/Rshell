@@ -1,0 +1,9 @@
+ls | wc
+git status | wc
+cat names.txt | wc
+cat CMakeLists.txt | wc
+ls | tr a-z A-Z
+git status | tr a-z A-Z
+cat names.txt | tr A-Z a-z
+cat CMakeLists.txt | tr A-Z a-z 
+exit
