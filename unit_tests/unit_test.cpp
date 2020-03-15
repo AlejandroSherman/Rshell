@@ -9,6 +9,8 @@
 #include "and_test.h"
 #include "base_test.h"
 #include "pipes_test.h"
+#include "input_test.h"
+#include "output_test.h"
 //#include "command_test.h"
 //#include "connector_test.h"
 //#include "exit_test.h"
