@@ -22,6 +22,15 @@ public:
   virtual string getPath(){
     return cmd;
   }
+  virtual void print() {
+      for (int i = 0; i < args.size(); i++)
+      {
+          cout << args.at(i) << endl;
+      }
+  }
+  virtual vector<string> getVector() {
+      return args; 
+    }
 };
 
 

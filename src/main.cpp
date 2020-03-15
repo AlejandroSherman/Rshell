@@ -39,9 +39,9 @@ int main()
 
 	Base *input = new Command();
   vector <string> tokens = (input->parsing(userinput));
-
-  if (tokens.size() != 0){
-
+ 
+  if (tokens.size() != 0) {
+    
 	int pos = 0;
 
   //if only an operator is entered output error msg and continue
@@ -120,11 +120,9 @@ int main()
   else if (tokens.at(tokens.size()-1) == ";") {
  	 tokens.resize(tokens.size()-1);
   }
-
-   //Prime the tokens vector to have commands together
-   vector <string> tokens_up;
-   tokens_up = update_tokens(tokens);
-
+      //Prime the tokens vector to have commands together
+      vector <string> tokens_up;
+      tokens_up = update_tokens(tokens);
    //END OF RAW INPUT OF INPUT TOKENS. AT THIS POINT BEGIN NEW ALGORITHM
    if(tokens_up.size() >= 2){//Handles edge case where "(command" is only entered
       if((tokens_up.at(tokens_up.size()-1) != ")") && (tokens_up.at(tokens_up.size()-2) == "(")){//handles edge case of missmatched parenthesis
@@ -197,6 +195,7 @@ int main()
        tree.pop();
        tree.push(new Output_A(left, right));
      }
+
      else if (postfix_tokens.at(i) == "|"){
        left = tree.top();
        tree.pop();
@@ -247,6 +246,7 @@ Command* command_creator(vector<string> tokens, int pos){
     argument.resize(argument.size()-1);
   	return new Test(command,argument);
   }
+  Command* test = new Command(command, argument); 
   return new Command(command,argument);
 }
 
@@ -313,6 +313,7 @@ vector<string> update_tokens(vector<string> tokens){
   string temp;
   while(pos < tokens.size()){
     if ((tokens.at(pos) == "||") || (tokens.at(pos) == "&&") || (tokens.at(pos) == ";") || (tokens.at(pos) == "<") || (tokens.at(pos) == ">") || (tokens.at(pos) == ">>") || (tokens.at(pos) == "|") || (tokens.at(pos) == "(") || (tokens.at(pos) == ")")){
+
       tokens_up.push_back(tokens.at(pos));
       pos++;
     }
@@ -324,6 +325,7 @@ vector<string> update_tokens(vector<string> tokens){
         break;
       }
       //while (pos < tokens.size()){
+
       while ((tokens.at(pos) != "||") && (tokens.at(pos) != "&&") && (tokens.at(pos) != ";") && (tokens.at(pos) != "<") && (tokens.at(pos) != ">") && (tokens.at(pos) != ">>")  && (tokens.at(pos) != "|") && (tokens.at(pos) != "(") && (tokens.at(pos) != ")")){
         temp = temp + " " + tokens.at(pos);
         pos++;
