@@ -1,9 +1,9 @@
 ls | wc || echo failed
 git status | wc || echo failed
-cat names.txt | wc || echo failed
-cat CMakeLists.txt | wc || echo failed
+cat ../names.txt | wc || echo failed
+cat ../CMakeLists.txt | wc || echo failed
 ls | tr a-z A-Z || echo failed
 git status | tr a-z A-Z || echo failed
-cat names.txt | tr A-Z a-z || echo failed
-cat CMakeLists.txt | tr A-Z a-z || echo failed
+cat ../names.txt | tr A-Z a-z || echo failed
+cat ../CMakeLists.txt | tr A-Z a-z || echo failed
 exit
