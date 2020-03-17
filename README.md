@@ -4,7 +4,7 @@
 ## Introduction
 Our project is the implementation of a basic command shell, complete with a user interface, and functionality of certain commands and connectors. The shell allows for the use of standard commands after they are input by a user, such as `exit` and `test` (both self designed), as well as the use of three connectors that allow users to execute multiple commands at once, and four more connectors that allow for input and output redirection. These connectors are "||" (or), "&&" (and), ";" (semi), "|" (pipe), "<" (input), ">" (output_t), and ">>" (output_a). All commands, save for the self designed ones as mentioned above, are executed in a fork are passed to the linux system via `execvp()`. The system runs commands and operators from left to right, unless parenthesis are entered, in which case, commands and operators will be executed in the proper precedence. The composite design pattern was utilized to implement the commands and the connectors, both inheriting from the base class, and each being superclasses of their own. The project is made in C++ and features have been implemented using C++ classes and functions.
 ## Diagram
-![OMT_Diagram](https://github.com/cs100/assignment-empty_string/blob/master/images/OMT_Diagram.png?raw=true)
+![OMT_Diagram](https://github.com/AlejandroSherman/Rshell/blob/master/images/OMT_Diagram.png?raw=true)
 
 ## Classes
 ### main.cpp
@@ -154,32 +154,32 @@ A class that implements the rshell ">>" connector
 * While the process is being executed by the child, the parent process will wait for the child to finish in order to continue
 
 ## Development and Testing Roadmap
-[#1](../../issues/1) Implement and test: Base Class
+1. Implement and test: Base Class
 
-[#2](../../issues/2) Implement and test: Connector
+2. Implement and test: Connector
 
-[#3](../../issues/3) Implement and test: Command
+3. Implement and test: Command
 
-[#4](../../issues/4) Implement and test: Exit
+4. Implement and test: Exit
 
-[#5](../../issues/5) Implement and test: Comment(in parsing)
+5. Implement and test: Comment(in parsing)
 
-[#6](../../issues/6) Implement and test: And
+6. Implement and test: And
 
-[#7](../../issues/7) Implement and test: Or
+7. Implement and test: Or
 
-[#8](../../issues/8) Implement and test: Semi
+8. Implement and test: Semi
 
-[#9](../../issues/9) Implement and test: Main(user interface)
+9. Implement and test: Main(user interface)
 
-[#10](../../issues/33) Implement and test: Test
+10. Implement and test: Test
 
-[#11](../../issues/34) Implement and test: Precedence(SY in main)
+11. Implement and test: Precedence(SY in main)
 
-[#12](../../issues/40) Implement and test: getPath
+12. Implement and test: getPath
 
-[#13](../../issues/39) Implement and test: Input Redirection
+13. Implement and test: Input Redirection
 
-[#14](../../issues/41) Implement and test: Output Redirection
+14. Implement and test: Output Redirection
 
-[#15](../../issues/46) Implement and test: Pipes
+15. Implement and test: Pipes

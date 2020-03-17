@@ -33,15 +33,15 @@ vector<string> update_tokens(vector<string> tokens);
 int main()
 {
   while (true){
-	cout <<"$ ";
+	cout <<"guest@rshell:~$ ";
 	string userinput;
 	getline(cin,userinput);
 
 	Base *input = new Command();
   vector <string> tokens = (input->parsing(userinput));
- 
+
   if (tokens.size() != 0) {
-    
+
 	int pos = 0;
 
   //if only an operator is entered output error msg and continue
@@ -246,7 +246,7 @@ Command* command_creator(vector<string> tokens, int pos){
     argument.resize(argument.size()-1);
   	return new Test(command,argument);
   }
-  Command* test = new Command(command, argument); 
+  Command* test = new Command(command, argument);
   return new Command(command,argument);
 }
 
