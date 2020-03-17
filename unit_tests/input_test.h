@@ -9,7 +9,7 @@ TEST(InputTestSet, input1)
   vec1.push_back("tr");
   vec1.push_back("a-z");
   vec1.push_back("A-Z");
-	vec2.push_back("../names.txt");
+	vec2.push_back("names.txt");
 
 	Command* cmd1 = new Command(vec1.at(0), vec1);
 	Command* cmd2 = new Command(vec2.at(0), vec2);
